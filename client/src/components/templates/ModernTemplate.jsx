@@ -47,7 +47,6 @@ const ModernTemplate = ({ portfolio, user, isDark }) => {
           <div className="space-y-8">
             {/* Profile Section */}
             <div className="relative group">
-              <div className={`absolute -inset-1 rounded-[2.5rem] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur group-hover:opacity-40 transition duration-1000 group-hover:duration-200`} />
               <div className={`relative w-40 h-40 rounded-[2.2rem] ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-white'} border-4 flex items-center justify-center mb-8 shadow-2xl overflow-hidden`}>
                 {personalInfo?.profilePhoto ? (
                   <img src={personalInfo.profilePhoto} alt={personalInfo.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
