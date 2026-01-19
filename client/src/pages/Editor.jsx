@@ -203,16 +203,16 @@ const Editor = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen mesh-gradient-dark text-white font-sans selection:bg-indigo-500/30">
       {/* Editor - Full Width */}
-      <div className="w-full flex flex-col border-r border-white/5 bg-slate-950">
+      <div className="w-full flex flex-col h-screen">
         {/* Header */}
-        <header className="h-16 flex items-center justify-between px-6 border-b border-white/5 bg-slate-950/50 backdrop-blur-xl shrink-0">
+        <header className="h-16 flex items-center justify-between px-6 border-b border-white/5 bg-slate-950/20 backdrop-blur-xl shrink-0 z-50">
           <div className="flex items-center gap-4">
             <button onClick={() => navigate('/dashboard')} className="p-2 hover:bg-white/5 rounded-xl transition-colors">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <h1 className="font-bold text-lg hidden sm:block">Editor</h1>
+            <h1 className="font-bold text-lg hidden sm:block font-outfit tracking-tight">Editor</h1>
           </div>
           
           <div className="flex items-center gap-3">
@@ -224,7 +224,7 @@ const Editor = () => {
             <button 
               onClick={handleSave} 
               disabled={saving}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2"
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2 hover:shadow-indigo-500/40 transform active:scale-95"
             >
               {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
               Save
@@ -233,7 +233,7 @@ const Editor = () => {
         </header>
 
         {/* Tab Navigation */}
-        <div className="flex overflow-x-auto no-scrollbar border-b border-white/5 bg-slate-950/30 shrink-0">
+        <div className="flex overflow-x-auto no-scrollbar border-b border-white/5 bg-slate-950/10 backdrop-blur-sm shrink-0">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -275,7 +275,7 @@ const Editor = () => {
                       name="name" 
                       value={portfolio.personalInfo.name} 
                       onChange={updatePersonalInfo}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                       placeholder="John Doe"
                     />
                   </div>
@@ -287,7 +287,7 @@ const Editor = () => {
                       name="role" 
                       value={portfolio.personalInfo.role} 
                       onChange={updatePersonalInfo}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                       placeholder="Full Stack Developer & Student"
                     />
                   </div>
@@ -299,7 +299,7 @@ const Editor = () => {
                       rows="4"
                       value={portfolio.personalInfo.bio} 
                       onChange={updatePersonalInfo}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all resize-none"
+                      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
                       placeholder="Tell recruiters about yourself..."
                     ></textarea>
                   </div>
@@ -311,7 +311,7 @@ const Editor = () => {
                       name="email" 
                       value={portfolio.personalInfo.email} 
                       onChange={updatePersonalInfo}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                     />
                   </div>
 
@@ -322,7 +322,7 @@ const Editor = () => {
                       name="location" 
                       value={portfolio.personalInfo.location} 
                       onChange={updatePersonalInfo}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                       placeholder="New York, NY"
                     />
                   </div>
@@ -360,7 +360,7 @@ const Editor = () => {
                 )}
 
                 {portfolio.experience.map((exp, index) => (
-                  <div key={index} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4 relative">
+                  <div key={index} className="glass-card-dark p-6 rounded-[2rem] space-y-4 relative">
                     <button
                       onClick={() => removeExperience(index)}
                       className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
@@ -375,7 +375,7 @@ const Editor = () => {
                           type="text"
                           value={exp.position}
                           onChange={(e) => updateExperience(index, 'position', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="Software Engineer"
                         />
                       </div>
@@ -385,7 +385,7 @@ const Editor = () => {
                           type="text"
                           value={exp.company}
                           onChange={(e) => updateExperience(index, 'company', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="Tech Corp"
                         />
                       </div>
@@ -395,7 +395,7 @@ const Editor = () => {
                           type="text"
                           value={exp.location}
                           onChange={(e) => updateExperience(index, 'location', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="Remote"
                         />
                       </div>
@@ -406,7 +406,7 @@ const Editor = () => {
                             type="text"
                             value={exp.startDate}
                             onChange={(e) => updateExperience(index, 'startDate', e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                             placeholder="Jan 2024"
                           />
                         </div>
@@ -416,7 +416,7 @@ const Editor = () => {
                             type="text"
                             value={exp.endDate}
                             onChange={(e) => updateExperience(index, 'endDate', e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                             placeholder="Present"
                           />
                         </div>
@@ -427,7 +427,7 @@ const Editor = () => {
                           rows="3"
                           value={exp.description}
                           onChange={(e) => updateExperience(index, 'description', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
                           placeholder="Describe your responsibilities and achievements..."
                         ></textarea>
                       </div>
@@ -467,7 +467,7 @@ const Editor = () => {
                 )}
 
                 {portfolio.education.map((edu, index) => (
-                  <div key={index} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4 relative">
+                  <div key={index} className="glass-card-dark p-6 rounded-[2rem] space-y-4 relative">
                     <button
                       onClick={() => removeEducation(index)}
                       className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
@@ -482,7 +482,7 @@ const Editor = () => {
                           type="text"
                           value={edu.institution}
                           onChange={(e) => updateEducation(index, 'institution', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="University Name"
                         />
                       </div>
@@ -492,7 +492,7 @@ const Editor = () => {
                           type="text"
                           value={edu.degree}
                           onChange={(e) => updateEducation(index, 'degree', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="Bachelor's"
                         />
                       </div>
@@ -502,7 +502,7 @@ const Editor = () => {
                           type="text"
                           value={edu.fieldOfStudy}
                           onChange={(e) => updateEducation(index, 'fieldOfStudy', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="Computer Science"
                         />
                       </div>
@@ -512,7 +512,7 @@ const Editor = () => {
                           type="text"
                           value={edu.startYear}
                           onChange={(e) => updateEducation(index, 'startYear', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="2020"
                         />
                       </div>
@@ -522,7 +522,7 @@ const Editor = () => {
                           type="text"
                           value={edu.endYear}
                           onChange={(e) => updateEducation(index, 'endYear', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="2024"
                         />
                       </div>
@@ -532,7 +532,7 @@ const Editor = () => {
                           rows="2"
                           value={edu.description}
                           onChange={(e) => updateEducation(index, 'description', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
                           placeholder="Optional: achievements, GPA, honors..."
                         ></textarea>
                       </div>
@@ -573,19 +573,19 @@ const Editor = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {portfolio.skills.map((skill, index) => (
-                    <div key={index} className="p-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-3 relative">
+                    <div key={index} className="glass-card-dark p-4 rounded-[1.5rem] flex items-center gap-3 relative">
                       <div className="flex-1 space-y-2">
                         <input
                           type="text"
                           value={skill.name}
                           onChange={(e) => updateSkill(index, 'name', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
                           placeholder="React.js"
                         />
                         <select
                           value={skill.level}
                           onChange={(e) => updateSkill(index, 'level', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
                         >
                           <option value="Beginner">Beginner</option>
                           <option value="Intermediate">Intermediate</option>
@@ -635,7 +635,7 @@ const Editor = () => {
                 )}
 
                 {portfolio.projects.map((project, index) => (
-                  <div key={index} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4 relative">
+                  <div key={index} className="glass-card-dark p-6 rounded-[2rem] space-y-4 relative">
                     <button
                       onClick={() => removeProject(index)}
                       className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
@@ -650,7 +650,7 @@ const Editor = () => {
                           type="text"
                           value={project.title}
                           onChange={(e) => updateProject(index, 'title', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="My Awesome Project"
                         />
                       </div>
@@ -660,7 +660,7 @@ const Editor = () => {
                           rows="3"
                           value={project.description}
                           onChange={(e) => updateProject(index, 'description', e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
                           placeholder="Describe what this project does and what problems it solves..."
                         ></textarea>
                       </div>
@@ -670,7 +670,7 @@ const Editor = () => {
                           type="text"
                           value={project.techStack?.join(', ') || ''}
                           onChange={(e) => updateProjectTechStack(index, e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                           placeholder="React Node.js MongoDB or React, Node.js, MongoDB"
                         />
                       </div>
@@ -681,7 +681,7 @@ const Editor = () => {
                             type="url"
                             value={project.githubLink}
                             onChange={(e) => updateProject(index, 'githubLink', e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                             placeholder="https://github.com/..."
                           />
                         </div>
@@ -691,7 +691,7 @@ const Editor = () => {
                             type="url"
                             value={project.liveLink}
                             onChange={(e) => updateProject(index, 'liveLink', e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
                             placeholder="https://..."
                           />
                         </div>
@@ -780,7 +780,7 @@ const Editor = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                  <div className="glass-card-dark p-6 rounded-[2rem]">
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-bold mb-1">Public Portfolio</h3>
@@ -801,7 +801,7 @@ const Editor = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                  <div className="glass-card-dark p-6 rounded-[2rem]">
                     <h3 className="font-bold mb-3">Theme</h3>
                     <div className="grid grid-cols-2 gap-3">
                       <button
@@ -829,12 +829,12 @@ const Editor = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                  <div className="glass-card-dark p-6 rounded-[2rem]">
                     <h3 className="font-bold mb-3">Template</h3>
                     <select
                       value={portfolio.templateId}
                       onChange={(e) => setPortfolio({ ...portfolio, templateId: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
                     >
                       <option value="modern">Modern</option>
                       <option value="minimal">Minimal</option>

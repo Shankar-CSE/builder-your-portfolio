@@ -28,7 +28,7 @@ const PublicPortfolio = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen mesh-gradient-dark flex items-center justify-center">
         <Loader2 className="w-12 h-12 text-indigo-500 animate-spin" />
       </div>
     );
@@ -36,13 +36,13 @@ const PublicPortfolio = () => {
 
   if (error || !data) {
     return (
-      <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-4 text-white font-sans text-center">
-        <h1 className="text-9xl font-black italic tracking-tighter text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none">404</h1>
+      <div className="min-h-screen mesh-gradient-dark flex flex-col items-center justify-center p-4 text-white font-sans text-center selection:bg-indigo-500/30">
+        <h1 className="text-[12rem] md:text-[20rem] font-black italic tracking-tighter text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-outfit">404</h1>
         <div className="relative z-10">
-          <h2 className="text-4xl font-black mb-4 uppercase italic">Portfolio Not Found</h2>
-          <p className="text-slate-500 mb-12 font-medium">{error}</p>
-          <Link to="/" className="px-10 py-4 bg-white text-black rounded-full font-black uppercase italic hover:scale-110 transition-transform shadow-2xl">
-            Go Home
+          <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase italic font-outfit tracking-tighter">Portfolio Not Found</h2>
+          <p className="text-slate-400 mb-12 font-medium text-lg">{error}</p>
+          <Link to="/" className="px-10 py-5 bg-white text-black rounded-full font-black uppercase italic hover:scale-110 transition-transform shadow-2xl tracking-tight text-lg">
+            Create Yours
           </Link>
         </div>
       </div>
