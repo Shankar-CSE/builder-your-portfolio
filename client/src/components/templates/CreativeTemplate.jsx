@@ -6,8 +6,8 @@ import {
   Zap
 } from 'lucide-react';
 
-const CreativeTemplate = ({ portfolio, user, isDark }) => {
-  const { personalInfo, education, experience, projects, skills, socialLinks } = portfolio;
+const CreativeTemplate = ({ portfolio, isDark }) => {
+  const { personalInfo, experience, projects, skills, socialLinks } = portfolio;
 
   const floatingAnimation = {
     initial: { y: 0 },
@@ -21,28 +21,7 @@ const CreativeTemplate = ({ portfolio, user, isDark }) => {
     }
   };
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
 
-  const slideUp = {
-    hidden: { y: 100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
 
   return (
     <div className={`min-h-screen relative overflow-hidden font-outfit ${isDark ? 'mesh-gradient-dark text-white' : 'mesh-gradient-light text-slate-900'} selection:bg-purple-500 selection:text-white`}>
