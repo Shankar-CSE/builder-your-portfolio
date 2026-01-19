@@ -171,7 +171,11 @@ const Editor = () => {
 
   const updateProjectTechStack = (index, techString) => {
     const updated = [...portfolio.projects];
-    updated[index].techStack = techString.split(',').map(t => t.trim()).filter(t => t);
+    // Split by comma or space, trim, and filter out empty strings
+    updated[index].techStack = techString
+      .split(/[,\s]+/)  // Split by comma or whitespace (one or more)
+      .map(t => t.trim())
+      .filter(t => t);
     setPortfolio({ ...portfolio, projects: updated });
   };
 
@@ -663,13 +667,13 @@ const Editor = () => {
                         ></textarea>
                       </div>
                       <div>
-                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Tech Stack (comma separated)</label>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Tech Stack (comma or space separated)</label>
                         <input
                           type="text"
                           value={project.techStack?.join(', ') || ''}
                           onChange={(e) => updateProjectTechStack(index, e.target.value)}
                           className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                          placeholder="React, Node.js, MongoDB"
+                          placeholder="React Node.js MongoDB or React, Node.js, MongoDB"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
