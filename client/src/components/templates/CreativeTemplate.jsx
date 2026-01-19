@@ -9,17 +9,7 @@ import {
 const CreativeTemplate = ({ portfolio, isDark }) => {
   const { personalInfo, experience, projects, skills, socialLinks } = portfolio;
 
-  const floatingAnimation = {
-    initial: { y: 0 },
-    animate: {
-      y: [0, -20, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
+
 
 
 
@@ -51,23 +41,7 @@ const CreativeTemplate = ({ portfolio, isDark }) => {
 
         {/* Hero Section */}
         <section className="px-8 py-20 lg:py-40 max-w-7xl mx-auto flex flex-col items-center text-center">
-          <motion.div
-            variants={floatingAnimation}
-            initial="initial"
-            animate="animate"
-            className="mb-12 relative"
-          >
-            <div className={`absolute inset-0 bg-gradient-to-tr from-indigo-500 to-pink-500 rounded-[3rem] blur-2xl opacity-40 animate-pulse`} />
-            <div className={`relative w-48 h-48 lg:w-64 lg:h-64 rounded-[3.5rem] overflow-hidden border-8 ${isDark ? 'border-white/5 bg-slate-900' : 'border-white bg-slate-100'} shadow-2xl`}>
-              {personalInfo?.profilePhoto ? (
-                <img src={personalInfo.profilePhoto} alt={personalInfo.name} className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-6xl font-black italic text-purple-500">
-                  {personalInfo?.name?.charAt(0)}
-                </div>
-              )}
-            </div>
-          </motion.div>
+
 
           <motion.h1 
             initial={{ y: 50, opacity: 0 }}

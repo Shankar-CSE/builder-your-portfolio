@@ -30,15 +30,7 @@ const MinimalTemplate = ({ portfolio, isDark }) => {
           >
             <div className="relative z-10">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10">
-                <div className={`w-32 h-32 lg:w-40 lg:h-40 rounded-[2rem] overflow-hidden ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'} border ring-4 ${isDark ? 'ring-white/5' : 'ring-white/50'}`}>
-                  {personalInfo?.profilePhoto ? (
-                    <img src={personalInfo.profilePhoto} alt={personalInfo.name} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
-                      <span className="text-5xl font-black text-white">{personalInfo?.name?.charAt(0)}</span>
-                    </div>
-                  )}
-                </div>
+
                 <div className="text-center md:text-left">
                   <h1 className={`text-4xl lg:text-6xl font-black tracking-tight mb-4 font-outfit uppercase italic ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {personalInfo?.name}

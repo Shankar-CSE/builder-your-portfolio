@@ -47,15 +47,7 @@ const ModernTemplate = ({ portfolio, isDark }) => {
           <div className="space-y-8">
             {/* Profile Section */}
             <div className="relative group">
-              <div className={`relative w-40 h-40 rounded-[2.2rem] ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-white'} border-4 flex items-center justify-center mb-8 shadow-2xl overflow-hidden`}>
-                {personalInfo?.profilePhoto ? (
-                  <img src={personalInfo.profilePhoto} alt={personalInfo.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
-                    <span className="text-6xl font-black text-white font-outfit">{personalInfo?.name?.charAt(0)}</span>
-                  </div>
-                )}
-              </div>
+
               
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
