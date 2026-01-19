@@ -44,7 +44,7 @@ const Editor = () => {
       try {
         const data = await portfolioService.getMyPortfolio();
         if (data) setPortfolio(data);
-      } catch (error) {
+      } catch {
         console.log('No existing portfolio found, starting fresh');
       } finally {
         setLoading(false);

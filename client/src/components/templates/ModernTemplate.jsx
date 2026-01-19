@@ -6,7 +6,7 @@ import {
   Sparkles, Terminal, Cpu, Globe
 } from 'lucide-react';
 
-const ModernTemplate = ({ portfolio, user, isDark }) => {
+const ModernTemplate = ({ portfolio, isDark }) => {
   const { personalInfo, education, experience, projects, skills, socialLinks } = portfolio;
 
   const containerVariants = {
