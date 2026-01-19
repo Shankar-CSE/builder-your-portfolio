@@ -2,242 +2,302 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Github, Linkedin, Twitter, Mail, MapPin, ExternalLink,
-  Calendar, BookOpen, Briefcase, Code, Layers, Award
+  Calendar, BookOpen, Briefcase, Code, Layers, Award,
+  Sparkles, Terminal, Cpu, Globe
 } from 'lucide-react';
 
 const ModernTemplate = ({ portfolio, user, isDark }) => {
   const { personalInfo, education, experience, projects, skills, socialLinks } = portfolio;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-slate-900' : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'}`}>
-      <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className={`min-h-screen font-sans selection:bg-indigo-500 selection:text-white ${isDark ? 'mesh-gradient-dark text-slate-200' : 'mesh-gradient-light text-slate-800'}`}>
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row min-h-screen relative">
+        
+        {/* Decorative Background Elements */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className={`absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full blur-[120px] opacity-20 ${isDark ? 'bg-indigo-600' : 'bg-indigo-400'}`} />
+          <div className={`absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] rounded-full blur-[120px] opacity-20 ${isDark ? 'bg-purple-600' : 'bg-purple-400'}`} />
+        </div>
+
         {/* Left Sidebar - Fixed on desktop */}
         <motion.aside 
-          initial={{ x: -50, opacity: 0 }}
+          initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className={`lg:w-1/3 lg:sticky lg:top-0 lg:h-screen ${isDark ? 'bg-slate-950' : 'bg-white'} p-8 lg:p-12 flex flex-col justify-between border-r ${isDark ? 'border-slate-800' : 'border-indigo-100'}`}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className={`lg:w-[400px] lg:sticky lg:top-0 lg:h-screen p-8 lg:p-12 flex flex-col justify-between z-20`}
         >
-          <div>
+          <div className="space-y-8">
             {/* Profile Section */}
-            <div className="mb-8">
-              <div className={`w-32 h-32 rounded-2xl ${isDark ? 'bg-indigo-900/30' : 'bg-gradient-to-br from-indigo-500 to-purple-600'} flex items-center justify-center mb-6 shadow-xl`}>
+            <div className="relative group">
+              <div className={`absolute -inset-1 rounded-[2.5rem] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur group-hover:opacity-40 transition duration-1000 group-hover:duration-200`} />
+              <div className={`relative w-40 h-40 rounded-[2.2rem] ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-white'} border-4 flex items-center justify-center mb-8 shadow-2xl overflow-hidden`}>
                 {personalInfo?.profilePhoto ? (
-                  <img src={personalInfo.profilePhoto} alt={personalInfo.name} className="w-full h-full object-cover rounded-2xl" />
+                  <img src={personalInfo.profilePhoto} alt={personalInfo.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 ) : (
-                  <span className="text-5xl font-black text-white">{personalInfo?.name?.charAt(0)}</span>
+                  <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                    <span className="text-6xl font-black text-white font-outfit">{personalInfo?.name?.charAt(0)}</span>
+                  </div>
                 )}
               </div>
               
-              <h1 className={`text-4xl font-black mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                {personalInfo?.name}
-              </h1>
-              <p className="text-xl font-bold text-indigo-600 mb-4">{personalInfo?.role}</p>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <h1 className={`text-4xl lg:text-5xl font-black mb-3 font-outfit tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  {personalInfo?.name}
+                </h1>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-500 text-sm font-bold mb-6">
+                  <Sparkles className="w-4 h-4" />
+                  {personalInfo?.role}
+                </div>
+              </motion.div>
               
-              <div className="space-y-2 mb-6">
+              <div className="space-y-4 mb-8">
                 {personalInfo?.email && (
-                  <a href={`mailto:${personalInfo.email}`} className={`flex items-center gap-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'} hover:text-indigo-600 transition-colors`}>
-                    <Mail className="w-4 h-4" /> {personalInfo.email}
+                  <a href={`mailto:${personalInfo.email}`} className={`flex items-center gap-3 text-sm ${isDark ? 'text-slate-400 hover:text-indigo-400' : 'text-slate-600 hover:text-indigo-600'} transition-all group/link`}>
+                    <div className={`p-2 rounded-lg ${isDark ? 'bg-slate-800 group-hover/link:bg-indigo-500/20' : 'bg-white group-hover/link:bg-indigo-50'} shadow-sm`}>
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    {personalInfo.email}
                   </a>
                 )}
                 {personalInfo?.location && (
-                  <p className={`flex items-center gap-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    <MapPin className="w-4 h-4" /> {personalInfo.location}
-                  </p>
+                  <div className={`flex items-center gap-3 text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    <div className={`p-2 rounded-lg ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-sm`}>
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    {personalInfo.location}
+                  </div>
                 )}
               </div>
 
               {/* Bio */}
-              <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'} mb-8`}>
+              <p className={`text-base leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'} mb-8 font-medium`}>
                 {personalInfo?.bio}
               </p>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 mb-8">
-                <div className={`${isDark ? 'bg-slate-900' : 'bg-indigo-50'} p-4 rounded-xl text-center`}>
-                  <div className="text-2xl font-black text-indigo-600">{projects?.length || 0}</div>
-                  <div className={`text-xs font-medium ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Projects</div>
-                </div>
-                <div className={`${isDark ? 'bg-slate-900' : 'bg-purple-50'} p-4 rounded-xl text-center`}>
-                  <div className="text-2xl font-black text-purple-600">{skills?.length || 0}</div>
-                  <div className={`text-xs font-medium ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Skills</div>
-                </div>
-                <div className={`${isDark ? 'bg-slate-900' : 'bg-blue-50'} p-4 rounded-xl text-center`}>
-                  <div className="text-2xl font-black text-blue-600">{experience?.length || 0}</div>
-                  <div className={`text-xs font-medium ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Years</div>
-                </div>
+              {/* Quick Stats */}
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { label: 'Projects', value: projects?.length || 0, color: 'text-indigo-500', bg: 'bg-indigo-500/10' },
+                  { label: 'Skills', value: skills?.length || 0, color: 'text-purple-500', bg: 'bg-purple-500/10' },
+                  { label: 'Exp', value: experience?.length || 0, color: 'text-pink-500', bg: 'bg-pink-500/10' }
+                ].map((stat, i) => ( stat.value > 0 && 
+                  <div key={i} className={`${stat.bg} p-4 rounded-2xl border border-white/5 backdrop-blur-sm`}>
+                    <div className={`text-2xl font-black ${stat.color} font-outfit`}>{stat.value}</div>
+                    <div className={`text-[10px] uppercase tracking-wider font-bold ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{stat.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Social Links */}
-          <div className="flex gap-3">
-            {socialLinks?.github && (
-              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" 
-                className={`p-3 ${isDark ? 'bg-slate-900 hover:bg-slate-800' : 'bg-indigo-100 hover:bg-indigo-200'} rounded-xl transition-colors`}>
-                <Github className="w-5 h-5" />
+          <div className="flex gap-4 mt-8 lg:mt-0">
+            {[
+              { icon: Github, href: socialLinks?.github, color: 'hover:bg-slate-800' },
+              { icon: Linkedin, href: socialLinks?.linkedin, color: 'hover:bg-blue-600' },
+              { icon: Twitter, href: socialLinks?.twitter, color: 'hover:bg-sky-500' }
+            ].map((social, i) => social.href && (
+              <a 
+                key={i}
+                href={social.href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`p-4 rounded-2xl ${isDark ? 'bg-slate-800/50' : 'bg-white'} border border-white/10 shadow-lg text-slate-400 hover:text-white ${social.color} transition-all duration-300 hover:-translate-y-1`}
+              >
+                <social.icon className="w-5 h-5" />
               </a>
-            )}
-            {socialLinks?.linkedin && (
-              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
-                className={`p-3 ${isDark ? 'bg-slate-900 hover:bg-slate-800' : 'bg-blue-100 hover:bg-blue-200'} rounded-xl transition-colors`}>
-                <Linkedin className="w-5 h-5" />
-              </a>
-            )}
-            {socialLinks?.twitter && (
-              <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer"
-                className={`p-3 ${isDark ? 'bg-slate-900 hover:bg-slate-800' : 'bg-purple-100 hover:bg-purple-200'} rounded-xl transition-colors`}>
-                <Twitter className="w-5 h-5" />
-              </a>
-            )}
+            ))}
           </div>
         </motion.aside>
 
         {/* Right Content - Scrollable */}
-        <main className="flex-1 p-8 lg:p-12 overflow-y-auto">
-          {/* Experience */}
-          <section className="mb-16">
-            <h2 className={`text-3xl font-black mb-8 flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              <Briefcase className="w-7 h-7 text-indigo-600" /> Experience
-            </h2>
-            <div className="space-y-6">
-              {experience?.length > 0 ? experience.map((exp, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`${isDark ? 'bg-slate-950' : 'bg-white'} p-6 rounded-2xl ${isDark ? 'border border-slate-800' : 'shadow-lg shadow-indigo-100/50'}`}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{exp.position}</h3>
-                      <p className="text-indigo-600 font-semibold">{exp.company}</p>
-                    </div>
-                    <span className={`text-sm font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                      {exp.startDate} - {exp.endDate}
-                    </span>
-                  </div>
-                  <p className={`${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{exp.description}</p>
-                </motion.div>
-              )) : (
-                <p className={`${isDark ? 'text-slate-500' : 'text-slate-400'} italic`}>No experience added yet.</p>
-              )}
-            </div>
-          </section>
+        <main className="flex-1 p-8 lg:p-12 lg:pt-24 z-10">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-24"
+          >
+            {/* Experience Section */}
+            <section id="experience">
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+                <h2 className={`text-3xl font-black font-outfit tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <Briefcase className="w-8 h-8 text-indigo-500" />
+                  Experience
+                </h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+              </div>
 
-          {/* Projects */}
-          <section className="mb-16">
-            <h2 className={`text-3xl font-black mb-8 flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              <Layers className="w-7 h-7 text-purple-600" /> Featured Projects
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {projects?.length > 0 ? projects.map((project, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`${isDark ? 'bg-slate-950' : 'bg-white'} p-6 rounded-2xl ${isDark ? 'border border-slate-800' : 'shadow-lg shadow-purple-100/50'} group hover:-translate-y-1 transition-transform`}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{project.title}</h3>
-                    <div className="flex gap-2">
-                      {project.githubLink && (
-                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
-                          className={`p-2 ${isDark ? 'bg-slate-900' : 'bg-slate-100'} rounded-lg hover:bg-indigo-600 hover:text-white transition-colors`}>
-                          <Github className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.liveLink && (
-                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer"
-                          className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      )}
+              <div className="space-y-6">
+                {experience?.length > 0 ? experience.map((exp, i) => (
+                  <motion.div 
+                    key={i}
+                    variants={itemVariants}
+                    className={`group relative ${isDark ? 'glass-card-dark' : 'glass-card'} p-8 rounded-[2rem] transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/10`}
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isDark ? 'bg-slate-800' : 'bg-indigo-50'} text-indigo-500 group-hover:scale-110 transition-transform`}>
+                          <Cpu className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{exp.position}</h3>
+                          <p className="text-indigo-500 font-bold tracking-tight">{exp.company}</p>
+                        </div>
+                      </div>
+                      <div className={`px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-500'}`}>
+                        {exp.startDate} — {exp.endDate}
+                      </div>
                     </div>
-                  </div>
-                  <p className={`${isDark ? 'text-slate-300' : 'text-slate-600'} mb-4`}>{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack?.map((tech, j) => (
-                      <span key={j} className={`px-3 py-1 text-xs font-semibold rounded-lg ${isDark ? 'bg-slate-900 text-indigo-400' : 'bg-indigo-50 text-indigo-600'}`}>
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              )) : (
-                <p className={`${isDark ? 'text-slate-500' : 'text-slate-400'} italic`}>No projects added yet.</p>
-              )}
-            </div>
-          </section>
+                    <p className={`leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'} pl-16`}>{exp.description}</p>
+                  </motion.div>
+                )) : (
+                  <div className="text-center py-12 opacity-50 font-medium">Add your experience to showcase your career journey.</div>
+                )}
+              </div>
+            </section>
 
-          {/* Skills */}
-          <section className="mb-16">
-            <h2 className={`text-3xl font-black mb-8 flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              <Code className="w-7 h-7 text-blue-600" /> Skills
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {skills?.length > 0 ? skills.map((skill, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: i * 0.05 }}
-                  className={`px-4 py-2 rounded-full font-semibold ${
-                    skill.level === 'Expert' ? (isDark ? 'bg-indigo-900/50 text-indigo-300' : 'bg-indigo-600 text-white') :
-                    skill.level === 'Advanced' ? (isDark ? 'bg-purple-900/50 text-purple-300' : 'bg-purple-600 text-white') :
-                    skill.level === 'Intermediate' ? (isDark ? 'bg-blue-900/50 text-blue-300' : 'bg-blue-600 text-white') :
-                    (isDark ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-700')
-                  }`}
-                >
-                  {skill.name}
-                </motion.div>
-              )) : (
-                <p className={`${isDark ? 'text-slate-500' : 'text-slate-400'} italic`}>No skills added yet.</p>
-              )}
-            </div>
-          </section>
+            {/* Projects Section */}
+            <section id="projects">
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+                <h2 className={`text-3xl font-black font-outfit tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <Layers className="w-8 h-8 text-purple-500" />
+                  Featured Works
+                </h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+              </div>
 
-          {/* Education */}
-          <section>
-            <h2 className={`text-3xl font-black mb-8 flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              <BookOpen className="w-7 h-7 text-emerald-600" /> Education
-            </h2>
-            <div className="space-y-6">
-              {education?.length > 0 ? education.map((edu, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`${isDark ? 'bg-slate-950' : 'bg-white'} p-6 rounded-2xl ${isDark ? 'border border-slate-800' : 'shadow-lg shadow-emerald-100/50'}`}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                        {edu.degree} in {edu.fieldOfStudy}
-                      </h3>
-                      <p className="text-emerald-600 font-semibold">{edu.institution}</p>
+              <div className="grid md:grid-cols-2 gap-8">
+                {projects?.length > 0 ? projects.map((project, i) => (
+                  <motion.div 
+                    key={i}
+                    variants={itemVariants}
+                    whileHover={{ y: -10 }}
+                    className={`group relative flex flex-col h-full ${isDark ? 'glass-card-dark' : 'glass-card'} p-8 rounded-[2.5rem] transition-all duration-500 overflow-hidden`}
+                  >
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex items-start justify-between mb-8">
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${isDark ? 'bg-slate-800' : 'bg-purple-50'} text-purple-500 group-hover:rotate-12 transition-transform duration-500`}>
+                          <Terminal className="w-7 h-7" />
+                        </div>
+                        <div className="flex gap-2">
+                          {project.githubLink && (
+                            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className={`p-3 rounded-xl ${isDark ? 'bg-slate-800 hover:text-white' : 'bg-slate-100 hover:text-indigo-600'} transition-all shadow-sm`}>
+                              <Github className="w-5 h-5" />
+                            </a>
+                          )}
+                          {project.liveLink && (
+                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="p-3 bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 transition-all">
+                              <ExternalLink className="w-5 h-5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <h3 className={`text-2xl font-black font-outfit mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>{project.title}</h3>
+                      <p className={`mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'} line-clamp-3 text-sm flex-grow`}>{project.description}</p>
+                      
+                      <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 mt-auto">
+                        {project.techStack?.map((tech, j) => (
+                          <span key={j} className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg ${isDark ? 'bg-slate-800 text-purple-400 border-slate-700' : 'bg-purple-50 text-purple-600 border-purple-100'} border transition-colors group-hover:bg-purple-500 group-hover:text-white`}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <span className={`text-sm font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                      {edu.startYear} - {edu.endYear}
-                    </span>
-                  </div>
-                  {edu.description && (
-                    <p className={`${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{edu.description}</p>
+                  </motion.div>
+                )) : (
+                  <div className="md:col-span-2 text-center py-12 opacity-50 font-medium">No projects added yet.</div>
+                )}
+              </div>
+            </section>
+
+            {/* Skills & Education Duo */}
+            <div className="grid lg:grid-cols-2 gap-16">
+              {/* Skills */}
+              <section id="skills">
+                <h2 className={`text-3xl font-black font-outfit tracking-tight flex items-center gap-3 mb-10 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <Code className="w-8 h-8 text-blue-500" />
+                  Skills
+                </h2>
+                <div className="flex flex-wrap gap-3">
+                  {skills?.length > 0 ? skills.map((skill, i) => (
+                    <motion.div 
+                      key={i}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.05 }}
+                      className={`px-5 py-2.5 rounded-2xl font-bold text-sm flex items-center gap-2 ${
+                        skill.level === 'Expert' ? (isDark ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' : 'bg-indigo-600 text-white border-indigo-600') :
+                        skill.level === 'Advanced' ? (isDark ? 'bg-purple-500/20 text-purple-400 border-purple-500/30' : 'bg-purple-600 text-white border-purple-600') :
+                        (isDark ? 'bg-slate-800/50 text-slate-300 border-white/5' : 'bg-white text-slate-700 border-slate-200 shadow-sm')
+                      } border backdrop-blur-sm transition-all`}
+                    >
+                      <Terminal className="w-3.5 h-3.5" />
+                      {skill.name}
+                    </motion.div>
+                  )) : (
+                    <div className="opacity-50 font-medium">Add skills to show your technical stack.</div>
                   )}
-                </motion.div>
-              )) : (
-                <p className={`${isDark ? 'text-slate-500' : 'text-slate-400'} italic`}>No education added yet.</p>
-              )}
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <div className={`mt-16 pt-8 border-t ${isDark ? 'border-slate-800' : 'border-slate-200'} text-center`}>
-            <p className={`text-sm font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-              Made with <span className="text-indigo-600">FirstPortfolio</span>
-            </p>
-          </div>
+              {/* Education */}
+              <section id="education">
+                <h2 className={`text-3xl font-black font-outfit tracking-tight flex items-center gap-3 mb-10 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <BookOpen className="w-8 h-8 text-emerald-500" />
+                  Education
+                </h2>
+                <div className="space-y-6">
+                  {education?.length > 0 ? education.map((edu, i) => (
+                    <motion.div 
+                      key={i}
+                      variants={itemVariants}
+                      className={`relative p-6 rounded-[1.5rem] ${isDark ? 'bg-white/5' : 'bg-white'} border border-white/10 group hover:border-emerald-500/30 transition-colors`}
+                    >
+                      <div className="mb-2 text-xs font-black uppercase tracking-widest text-emerald-500">
+                        {edu.startYear} — {edu.endYear}
+                      </div>
+                      <h3 className={`font-bold mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{edu.degree} in {edu.fieldOfStudy}</h3>
+                      <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{edu.institution}</p>
+                    </motion.div>
+                  )) : (
+                    <div className="opacity-50 font-medium">Add educational details to complete your profile.</div>
+                  )}
+                </div>
+              </section>
+            </div>
+
+            <footer className={`pt-12 border-t ${isDark ? 'border-white/5' : 'border-slate-200'} text-center pb-8`}>
+              <div className="flex items-center justify-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+                MADE WITH <Globe className="w-3 h-3 text-indigo-500" /> FIRSTPORTFOLIO
+              </div>
+            </footer>
+          </motion.div>
         </main>
       </div>
     </div>
