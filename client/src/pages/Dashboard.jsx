@@ -13,13 +13,16 @@ import {
   CheckCircle2, 
   Eye,
   BarChart3,
-  Layout
+  Layout,
+  Copy,
+  Check
 } from 'lucide-react';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const [portfolio, setPortfolio] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +43,17 @@ const Dashboard = () => {
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  const handleCopyURL = async () => {
+    const portfolioURL = `${window.location.origin}/u/${user?.username}`;
+    try {
+      await navigator.clipboard.writeText(portfolioURL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   if (loading) {
@@ -126,8 +140,19 @@ const Dashboard = () => {
                         >
                           <Eye className="w-4 h-4" /> View
                         </a>
-                        <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl transition-colors text-sm font-semibold">
-                          <ExternalLink className="w-4 h-4" /> Share
+                        <button 
+                          onClick={handleCopyURL}
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl transition-colors text-sm font-semibold"
+                        >
+                          {copied ? (
+                            <>
+                              <Check className="w-4 h-4" /> Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4" /> Copy
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
