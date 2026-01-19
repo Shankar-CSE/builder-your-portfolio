@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import portfolioService from '../api/portfolioService';
+import ModernTemplate from '../components/templates/ModernTemplate';
+import MinimalTemplate from '../components/templates/MinimalTemplate';
 import { 
   Github, 
   Linkedin, 
@@ -67,6 +69,16 @@ const PublicPortfolio = () => {
   // Get template (default to modern if not set)
   const template = templateId || 'modern';
 
+  // Render different templates based on templateId
+  if (template === 'modern') {
+    return <ModernTemplate portfolio={portfolio} user={user} isDark={isDark} />;
+  }
+
+  if (template === 'minimal') {
+    return <MinimalTemplate portfolio={portfolio} user={user} isDark={isDark} />;
+  }
+
+  // Creative template (default/fallback) - use existing design below
   return (
     <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'} selection:bg-indigo-100 selection:text-indigo-900 template-${template}`}>
       {/* Hero Section */}
