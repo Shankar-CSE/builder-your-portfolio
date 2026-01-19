@@ -59,13 +59,16 @@ const PublicPortfolio = () => {
   }
 
   const { portfolio, user } = data;
-  const { personalInfo, education, experience, projects, skills, socialLinks, settings } = portfolio;
+  const { personalInfo, education, experience, projects, skills, socialLinks, settings, templateId } = portfolio;
   
   // Determine if dark theme is enabled
   const isDark = settings?.theme === 'dark';
+  
+  // Get template (default to modern if not set)
+  const template = templateId || 'modern';
 
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'} selection:bg-indigo-100 selection:text-indigo-900`}>
+    <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'} selection:bg-indigo-100 selection:text-indigo-900 template-${template}`}>
       {/* Hero Section */}
       <section className={`relative py-20 lg:py-32 overflow-hidden ${isDark ? 'border-b border-white/10' : 'border-b border-slate-100'}`}>
         <div className={`absolute top-0 right-0 w-1/3 h-full ${isDark ? 'bg-white/5' : 'bg-slate-50'} -skew-x-12 translate-x-1/2 pointer-events-none`} />

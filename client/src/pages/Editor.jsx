@@ -12,11 +12,9 @@ import {
   Code, 
   Layers, 
   Globe, 
-  Eye,
   Settings as SettingsIcon,
   Loader2,
   CheckCircle2,
-  Image as ImageIcon,
   Plus,
   Trash2,
   X
@@ -205,9 +203,9 @@ const Editor = () => {
   }
 
   return (
-    <div className="flex h-screen bg-slate-950 text-white overflow-hidden">
-      {/* Left Sidebar - Form */}
-      <div className="w-full lg:w-1/2 flex flex-col border-r border-white/5 bg-slate-950">
+    <div className="min-h-screen bg-slate-950 text-white">
+      {/* Editor - Full Width */}
+      <div className="w-full flex flex-col border-r border-white/5 bg-slate-950">
         {/* Header */}
         <header className="h-16 flex items-center justify-between px-6 border-b border-white/5 bg-slate-950/50 backdrop-blur-xl shrink-0">
           <div className="flex items-center gap-4">
@@ -847,79 +845,6 @@ const Editor = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Right - Live Preview */}
-      <div className="hidden lg:block lg:w-1/2 bg-slate-900 overflow-hidden relative">
-        <div className="absolute top-0 w-full z-10 p-4 flex justify-between items-center pointer-events-none">
-          <span className="px-3 py-1 bg-slate-950/80 backdrop-blur text-[10px] font-bold uppercase tracking-widest rounded-full border border-white/5 text-slate-400">Live Preview</span>
-          <div className="flex gap-2 pointer-events-auto">
-             <button className="p-2 bg-slate-950/80 backdrop-blur rounded-lg border border-white/5 hover:bg-slate-800 transition-colors">
-               <Eye className="w-4 h-4 text-slate-400" />
-             </button>
-          </div>
-        </div>
-
-        <div className={`h-full overflow-y-auto p-12 ${portfolio.settings.theme === 'dark' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'} rounded-s-[40px] shadow-2xl origin-top transition-all duration-500 scale-[0.98] custom-scrollbar`}>
-          {/* Preview Content */}
-          <div className="max-w-xl mx-auto py-10">
-            <div className="flex items-center gap-6 mb-12">
-              <div className={`w-24 h-24 rounded-3xl ${portfolio.settings.theme === 'dark' ? 'bg-white/5 border-2 border-slate-800' : 'bg-slate-100 border-2 border-slate-50'} flex items-center justify-center`}>
-                <ImageIcon className={`w-8 h-8 ${portfolio.settings.theme === 'dark' ? 'text-slate-700' : 'text-slate-300'}`} />
-              </div>
-              <div>
-                <h1 className="text-4xl font-black tracking-tight mb-2">{portfolio.personalInfo.name || 'Your Name'}</h1>
-                <p className="text-lg font-medium text-indigo-600">{portfolio.personalInfo.role || 'Professional Role'}</p>
-              </div>
-            </div>
-
-            <div className={`space-y-6 mb-10 transition-opacity ${portfolio.personalInfo.bio ? 'opacity-100' : 'opacity-20'}`}>
-              <h2 className={`text-xs font-black uppercase tracking-[0.2em] ${portfolio.settings.theme === 'dark' ? 'text-slate-600' : 'text-slate-400'}`}>About Me</h2>
-              <p className={`${portfolio.settings.theme === 'dark' ? 'text-slate-300' : 'text-slate-600'} leading-relaxed text-lg italic`}>
-                {portfolio.personalInfo.bio || 'Your bio will appear here as you type in the editor on the left. Tell the world about your passion and skills.'}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-10">
-              <div className={`p-6 ${portfolio.settings.theme === 'dark' ? 'bg-white/5 border border-white/10' : 'bg-slate-50 border border-slate-100'} rounded-3xl`}>
-                <h3 className={`text-xs font-black uppercase tracking-widest ${portfolio.settings.theme === 'dark' ? 'text-slate-600' : 'text-slate-400'} mb-2 text-center`}>Projects</h3>
-                <div className="text-3xl font-black text-center">{portfolio.projects?.length || 0}</div>
-              </div>
-              <div className={`p-6 ${portfolio.settings.theme === 'dark' ? 'bg-white/5 border border-white/10' : 'bg-slate-50 border border-slate-100'} rounded-3xl`}>
-                <h3 className={`text-xs font-black uppercase tracking-widest ${portfolio.settings.theme === 'dark' ? 'text-slate-600' : 'text-slate-400'} mb-2 text-center`}>Skills</h3>
-                <div className="text-3xl font-black text-center">{portfolio.skills?.length || 0}</div>
-              </div>
-            </div>
-
-            {/* Skills Preview */}
-            {portfolio.skills?.length > 0 && (
-              <div className="mb-10">
-                <h2 className={`text-xs font-black uppercase tracking-[0.2em] ${portfolio.settings.theme === 'dark' ? 'text-slate-600' : 'text-slate-400'} mb-4`}>Skills</h2>
-                <div className="flex flex-wrap gap-2">
-                  {portfolio.skills.slice(0, 6).map((skill, i) => (
-                    <span key={i} className={`px-3 py-1 ${portfolio.settings.theme === 'dark' ? 'bg-white/5 text-slate-300' : 'bg-slate-100 text-slate-700'} rounded-full text-sm font-medium`}>
-                      {skill.name}
-                    </span>
-                  ))}
-                  {portfolio.skills.length > 6 && (
-                    <span className="px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium">
-                      +{portfolio.skills.length - 6} more
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
-            
-            <div className={`mt-12 pt-12 ${portfolio.settings.theme === 'dark' ? 'border-t border-white/10' : 'border-t border-slate-100'} flex justify-between items-center`}>
-               <div className="flex gap-4">
-                 {portfolio.socialLinks?.github && <div className={`w-8 h-8 rounded-full ${portfolio.settings.theme === 'dark' ? 'bg-white/5' : 'bg-slate-200'}`}></div>}
-                 {portfolio.socialLinks?.linkedin && <div className={`w-8 h-8 rounded-full ${portfolio.settings.theme === 'dark' ? 'bg-white/5' : 'bg-slate-200'}`}></div>}
-                 {portfolio.socialLinks?.twitter && <div className={`w-8 h-8 rounded-full ${portfolio.settings.theme === 'dark' ? 'bg-white/5' : 'bg-slate-200'}`}></div>}
-               </div>
-               <p className={`text-xs font-bold ${portfolio.settings.theme === 'dark' ? 'text-slate-700' : 'text-slate-300'}`}>MADE WITH FIRSTPORTFOLIO</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

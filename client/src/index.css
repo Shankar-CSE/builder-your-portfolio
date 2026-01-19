@@ -29,3 +29,62 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Template Styles */
+/* Modern Template - Current design (default) */
+.template-modern {
+  /* Uses default styles */
+}
+
+/* Minimal Template - Clean and simple */
+.template-minimal section {
+  border-radius: 0 !important;
+}
+
+.template-minimal h1,
+.template-minimal h2,
+.template-minimal h3 {
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+}
+
+.template-minimal [class*="rounded-"] {
+  border-radius: 0.5rem !important;
+}
+
+.template-minimal button,
+.template-minimal a {
+  border-radius: 0.375rem !important;
+}
+
+/* Creative Template - Bold and colorful */
+.template-creative {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+}
+
+.template-creative h1,
+.template-creative h2 {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.template-creative [class*="rounded-"] {
+  border-radius: 2rem !important;
+}
+
+.template-creative section:nth-child(even) {
+  position: relative;
+}
+
+.template-creative section:nth-child(even)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.03), transparent);
+  pointer-events: none;
+}
