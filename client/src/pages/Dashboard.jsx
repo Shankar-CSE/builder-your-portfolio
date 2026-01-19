@@ -129,7 +129,7 @@ const Dashboard = () => {
                     <h2 className="text-2xl font-bold mb-6 font-outfit">Your portfolio is live!</h2>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       <div className="px-4 py-3 bg-slate-950/50 border border-white/10 rounded-xl text-sm font-mono text-slate-300 w-full sm:w-auto overflow-hidden text-ellipsis italic backdrop-blur-md">
-                        firstportfolio.com/u/{user?.username}
+                        myfirstportfolio-coral.vercel.app/u/{user?.username}
                       </div>
                       <div className="flex gap-2 w-full sm:w-auto">
                         <a 
@@ -167,7 +167,7 @@ const Dashboard = () => {
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* <div className="grid grid-cols-2 gap-4">
               <div className="glass-card-dark rounded-[2rem] p-6 hover:bg-white/[0.07] transition-colors cursor-default">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
@@ -188,11 +188,11 @@ const Dashboard = () => {
                 <div className="text-2xl font-black mb-1 font-outfit">12</div>
                 <div className="text-sm text-slate-400 font-medium">Link Clicks</div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Sidebar Cards */}
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-[2rem] p-6 text-white relative overflow-hidden group shadow-xl shadow-indigo-500/20">
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
               <h3 className="text-lg font-bold mb-2 relative z-10 font-outfit flex items-center gap-2">
@@ -225,7 +225,7 @@ const Dashboard = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </main>
     </div>
