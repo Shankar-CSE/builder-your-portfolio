@@ -221,7 +221,9 @@ const MinimalTemplate = ({ portfolio, isDark }) => {
             FIRSTPORTFOLIO ARCHIVE © 2026
           </div>
           <div className="flex gap-4">
-            <span className="text-xs font-black uppercase tracking-widest italic text-indigo-500">Built to be stunning.</span>
+            <a href="/" className="text-xs font-black uppercase tracking-widest italic text-indigo-500 hover:text-indigo-600 transition-colors">
+              Built with FirstPortfolio. Create yours free.
+            </a>
           </div>
         </footer>
 
