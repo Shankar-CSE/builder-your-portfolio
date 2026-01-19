@@ -8,9 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Editor from './pages/Editor';
-
-// Other Pages (to be created)
-const PublicPortfolio = () => <div className="p-10 text-center text-white bg-slate-950 min-h-screen"><h1>Public Portfolio View</h1><p>This is how others see you.</p></div>;
+import PublicPortfolio from './pages/PublicPortfolio';
 
 function App() {
   return (

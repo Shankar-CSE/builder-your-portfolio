@@ -16,7 +16,10 @@ import {
   Settings as SettingsIcon,
   Loader2,
   CheckCircle2,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Plus,
+  Trash2,
+  X
 } from 'lucide-react';
 
 const Editor = () => {
@@ -29,6 +32,7 @@ const Editor = () => {
     skills: [],
     projects: [],
     experience: [],
+    certifications: [],
     socialLinks: { github: '', linkedin: '', twitter: '', portfolio: '' },
     settings: { theme: 'light', isPublic: true },
     templateId: 'modern'
@@ -70,6 +74,111 @@ const Editor = () => {
     setPortfolio({
       ...portfolio,
       personalInfo: { ...portfolio.personalInfo, [name]: value }
+    });
+  };
+
+  const updateSocialLinks = (e) => {
+    const { name, value } = e.target;
+    setPortfolio({
+      ...portfolio,
+      socialLinks: { ...portfolio.socialLinks, [name]: value }
+    });
+  };
+
+  const updateSettings = (key, value) => {
+    setPortfolio({
+      ...portfolio,
+      settings: { ...portfolio.settings, [key]: value }
+    });
+  };
+
+  // Experience handlers
+  const addExperience = () => {
+    setPortfolio({
+      ...portfolio,
+      experience: [...portfolio.experience, { company: '', position: '', location: '', startDate: '', endDate: '', description: '' }]
+    });
+  };
+
+  const updateExperience = (index, field, value) => {
+    const updated = [...portfolio.experience];
+    updated[index][field] = value;
+    setPortfolio({ ...portfolio, experience: updated });
+  };
+
+  const removeExperience = (index) => {
+    setPortfolio({
+      ...portfolio,
+      experience: portfolio.experience.filter((_, i) => i !== index)
+    });
+  };
+
+  // Education handlers
+  const addEducation = () => {
+    setPortfolio({
+      ...portfolio,
+      education: [...portfolio.education, { institution: '', degree: '', fieldOfStudy: '', startYear: '', endYear: '', description: '' }]
+    });
+  };
+
+  const updateEducation = (index, field, value) => {
+    const updated = [...portfolio.education];
+    updated[index][field] = value;
+    setPortfolio({ ...portfolio, education: updated });
+  };
+
+  const removeEducation = (index) => {
+    setPortfolio({
+      ...portfolio,
+      education: portfolio.education.filter((_, i) => i !== index)
+    });
+  };
+
+  // Skills handlers
+  const addSkill = () => {
+    setPortfolio({
+      ...portfolio,
+      skills: [...portfolio.skills, { name: '', level: 'Beginner' }]
+    });
+  };
+
+  const updateSkill = (index, field, value) => {
+    const updated = [...portfolio.skills];
+    updated[index][field] = value;
+    setPortfolio({ ...portfolio, skills: updated });
+  };
+
+  const removeSkill = (index) => {
+    setPortfolio({
+      ...portfolio,
+      skills: portfolio.skills.filter((_, i) => i !== index)
+    });
+  };
+
+  // Projects handlers
+  const addProject = () => {
+    setPortfolio({
+      ...portfolio,
+      projects: [...portfolio.projects, { title: '', description: '', techStack: [], githubLink: '', liveLink: '', image: '' }]
+    });
+  };
+
+  const updateProject = (index, field, value) => {
+    const updated = [...portfolio.projects];
+    updated[index][field] = value;
+    setPortfolio({ ...portfolio, projects: updated });
+  };
+
+  const updateProjectTechStack = (index, techString) => {
+    const updated = [...portfolio.projects];
+    updated[index].techStack = techString.split(',').map(t => t.trim()).filter(t => t);
+    setPortfolio({ ...portfolio, projects: updated });
+  };
+
+  const removeProject = (index) => {
+    setPortfolio({
+      ...portfolio,
+      projects: portfolio.projects.filter((_, i) => i !== index)
     });
   };
 
@@ -142,6 +251,7 @@ const Editor = () => {
         {/* Form Content */}
         <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
           <AnimatePresence mode="wait">
+            {/* Personal Info Tab */}
             {activeTab === 'personal' && (
               <motion.div
                 key="personal"
@@ -218,14 +328,519 @@ const Editor = () => {
               </motion.div>
             )}
             
-            {activeTab !== 'personal' && (
-              <div className="flex flex-col items-center justify-center h-full text-center py-20">
-                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
-                  {tabs.find(t => t.id === activeTab)?.icon}
+            {/* Experience Tab */}
+            {activeTab === 'experience' && (
+              <motion.div
+                key="experience"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6 max-w-2xl"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold mb-1">Work Experience</h2>
+                    <p className="text-sm text-slate-500">Add your professional experience, internships, or jobs.</p>
+                  </div>
+                  <button
+                    onClick={addExperience}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add
+                  </button>
                 </div>
-                <h3 className="text-lg font-bold">Coming Soon</h3>
-                <p className="text-slate-500 max-w-xs">I'm currently implementing this section. Please check back in a few minutes!</p>
-              </div>
+
+                {portfolio.experience.length === 0 && (
+                  <div className="text-center py-12 text-slate-500">
+                    <Briefcase className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                    <p>No experience added yet. Click "Add" to get started!</p>
+                  </div>
+                )}
+
+                {portfolio.experience.map((exp, index) => (
+                  <div key={index} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4 relative">
+                    <button
+                      onClick={() => removeExperience(index)}
+                      className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Position</label>
+                        <input
+                          type="text"
+                          value={exp.position}
+                          onChange={(e) => updateExperience(index, 'position', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="Software Engineer"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Company</label>
+                        <input
+                          type="text"
+                          value={exp.company}
+                          onChange={(e) => updateExperience(index, 'company', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="Tech Corp"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Location</label>
+                        <input
+                          type="text"
+                          value={exp.location}
+                          onChange={(e) => updateExperience(index, 'location', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="Remote"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Start</label>
+                          <input
+                            type="text"
+                            value={exp.startDate}
+                            onChange={(e) => updateExperience(index, 'startDate', e.target.value)}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="Jan 2024"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">End</label>
+                          <input
+                            type="text"
+                            value={exp.endDate}
+                            onChange={(e) => updateExperience(index, 'endDate', e.target.value)}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="Present"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-span-2">
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Description</label>
+                        <textarea
+                          rows="3"
+                          value={exp.description}
+                          onChange={(e) => updateExperience(index, 'description', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          placeholder="Describe your responsibilities and achievements..."
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Education Tab */}
+            {activeTab === 'education' && (
+              <motion.div
+                key="education"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6 max-w-2xl"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold mb-1">Education</h2>
+                    <p className="text-sm text-slate-500">Add your academic qualifications.</p>
+                  </div>
+                  <button
+                    onClick={addEducation}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add
+                  </button>
+                </div>
+
+                {portfolio.education.length === 0 && (
+                  <div className="text-center py-12 text-slate-500">
+                    <GraduationCap className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                    <p>No education history added yet. Click "Add" to get started!</p>
+                  </div>
+                )}
+
+                {portfolio.education.map((edu, index) => (
+                  <div key={index} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4 relative">
+                    <button
+                      onClick={() => removeEducation(index)}
+                      className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="col-span-2">
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Institution</label>
+                        <input
+                          type="text"
+                          value={edu.institution}
+                          onChange={(e) => updateEducation(index, 'institution', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="University Name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Degree</label>
+                        <input
+                          type="text"
+                          value={edu.degree}
+                          onChange={(e) => updateEducation(index, 'degree', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="Bachelor's"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Field of Study</label>
+                        <input
+                          type="text"
+                          value={edu.fieldOfStudy}
+                          onChange={(e) => updateEducation(index, 'fieldOfStudy', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="Computer Science"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Start Year</label>
+                        <input
+                          type="text"
+                          value={edu.startYear}
+                          onChange={(e) => updateEducation(index, 'startYear', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="2020"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">End Year</label>
+                        <input
+                          type="text"
+                          value={edu.endYear}
+                          onChange={(e) => updateEducation(index, 'endYear', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="2024"
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Description</label>
+                        <textarea
+                          rows="2"
+                          value={edu.description}
+                          onChange={(e) => updateEducation(index, 'description', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          placeholder="Optional: achievements, GPA, honors..."
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Skills Tab */}
+            {activeTab === 'skills' && (
+              <motion.div
+                key="skills"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6 max-w-2xl"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold mb-1">Skills</h2>
+                    <p className="text-sm text-slate-500">Add your technical and soft skills.</p>
+                  </div>
+                  <button
+                    onClick={addSkill}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add
+                  </button>
+                </div>
+
+                {portfolio.skills.length === 0 && (
+                  <div className="text-center py-12 text-slate-500">
+                    <Code className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                    <p>No skills added yet. Click "Add" to get started!</p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {portfolio.skills.map((skill, index) => (
+                    <div key={index} className="p-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-3 relative">
+                      <div className="flex-1 space-y-2">
+                        <input
+                          type="text"
+                          value={skill.name}
+                          onChange={(e) => updateSkill(index, 'name', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="React.js"
+                        />
+                        <select
+                          value={skill.level}
+                          onChange={(e) => updateSkill(index, 'level', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                          <option value="Beginner">Beginner</option>
+                          <option value="Intermediate">Intermediate</option>
+                          <option value="Advanced">Advanced</option>
+                          <option value="Expert">Expert</option>
+                        </select>
+                      </div>
+                      <button
+                        onClick={() => removeSkill(index)}
+                        className="p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Projects Tab */}
+            {activeTab === 'projects' && (
+              <motion.div
+                key="projects"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6 max-w-2xl"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold mb-1">Projects</h2>
+                    <p className="text-sm text-slate-500">Showcase your best work and projects.</p>
+                  </div>
+                  <button
+                    onClick={addProject}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add
+                  </button>
+                </div>
+
+                {portfolio.projects.length === 0 && (
+                  <div className="text-center py-12 text-slate-500">
+                    <Layers className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                    <p>No projects added yet. Click "Add" to get started!</p>
+                  </div>
+                )}
+
+                {portfolio.projects.map((project, index) => (
+                  <div key={index} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4 relative">
+                    <button
+                      onClick={() => removeProject(index)}
+                      className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+
+                    <div className="grid grid-cols-1 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Project Title</label>
+                        <input
+                          type="text"
+                          value={project.title}
+                          onChange={(e) => updateProject(index, 'title', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="My Awesome Project"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Description</label>
+                        <textarea
+                          rows="3"
+                          value={project.description}
+                          onChange={(e) => updateProject(index, 'description', e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          placeholder="Describe what this project does and what problems it solves..."
+                        ></textarea>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Tech Stack (comma separated)</label>
+                        <input
+                          type="text"
+                          value={project.techStack?.join(', ') || ''}
+                          onChange={(e) => updateProjectTechStack(index, e.target.value)}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="React, Node.js, MongoDB"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">GitHub Link</label>
+                          <input
+                            type="url"
+                            value={project.githubLink}
+                            onChange={(e) => updateProject(index, 'githubLink', e.target.value)}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="https://github.com/..."
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Live Link</label>
+                          <input
+                            type="url"
+                            value={project.liveLink}
+                            onChange={(e) => updateProject(index, 'liveLink', e.target.value)}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="https://..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Social Links Tab */}
+            {activeTab === 'social' && (
+              <motion.div
+                key="social"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6 max-w-2xl"
+              >
+                <div>
+                  <h2 className="text-xl font-bold mb-1">Social Links</h2>
+                  <p className="text-sm text-slate-500 mb-6">Add your social media and professional profiles.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">GitHub</label>
+                    <input
+                      type="url"
+                      name="github"
+                      value={portfolio.socialLinks.github}
+                      onChange={updateSocialLinks}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      placeholder="https://github.com/yourusername"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">LinkedIn</label>
+                    <input
+                      type="url"
+                      name="linkedin"
+                      value={portfolio.socialLinks.linkedin}
+                      onChange={updateSocialLinks}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      placeholder="https://linkedin.com/in/yourusername"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Twitter</label>
+                    <input
+                      type="url"
+                      name="twitter"
+                      value={portfolio.socialLinks.twitter}
+                      onChange={updateSocialLinks}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      placeholder="https://twitter.com/yourusername"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Portfolio Website</label>
+                    <input
+                      type="url"
+                      name="portfolio"
+                      value={portfolio.socialLinks.portfolio}
+                      onChange={updateSocialLinks}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      placeholder="https://yourwebsite.com"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Settings Tab */}
+            {activeTab === 'settings' && (
+              <motion.div
+                key="settings"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6 max-w-2xl"
+              >
+                <div>
+                  <h2 className="text-xl font-bold mb-1">Portfolio Settings</h2>
+                  <p className="text-sm text-slate-500 mb-6">Customize your portfolio visibility and appearance.</p>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-bold mb-1">Public Portfolio</h3>
+                        <p className="text-sm text-slate-500">Make your portfolio visible to everyone</p>
+                      </div>
+                      <button
+                        onClick={() => updateSettings('isPublic', !portfolio.settings.isPublic)}
+                        className={`relative w-14 h-7 rounded-full transition-colors ${
+                          portfolio.settings.isPublic ? 'bg-indigo-600' : 'bg-slate-700'
+                        }`}
+                      >
+                        <div
+                          className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-transform ${
+                            portfolio.settings.isPublic ? 'translate-x-7' : 'translate-x-0'
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                    <h3 className="font-bold mb-3">Theme</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => updateSettings('theme', 'light')}
+                        className={`p-4 rounded-xl border-2 transition-all ${
+                          portfolio.settings.theme === 'light'
+                            ? 'border-indigo-500 bg-indigo-500/10'
+                            : 'border-white/10 bg-white/5'
+                        }`}
+                      >
+                        <div className="w-full h-16 bg-white rounded-lg mb-2"></div>
+                        <p className="text-sm font-medium">Light</p>
+                      </button>
+                      <button
+                        onClick={() => updateSettings('theme', 'dark')}
+                        className={`p-4 rounded-xl border-2 transition-all ${
+                          portfolio.settings.theme === 'dark'
+                            ? 'border-indigo-500 bg-indigo-500/10'
+                            : 'border-white/10 bg-white/5'
+                        }`}
+                      >
+                        <div className="w-full h-16 bg-slate-900 rounded-lg mb-2"></div>
+                        <p className="text-sm font-medium">Dark</p>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                    <h3 className="font-bold mb-3">Template</h3>
+                    <select
+                      value={portfolio.templateId}
+                      onChange={(e) => setPortfolio({ ...portfolio, templateId: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      <option value="modern">Modern</option>
+                      <option value="minimal">Minimal</option>
+                      <option value="creative">Creative</option>
+                    </select>
+                  </div>
+                </div>
+              </motion.div>
             )}
           </AnimatePresence>
         </div>
@@ -243,7 +858,7 @@ const Editor = () => {
         </div>
 
         <div className="h-full overflow-y-auto p-12 bg-white text-slate-900 rounded-s-[40px] shadow-2xl origin-top transition-transform duration-500 scale-[0.98]">
-          {/* Preview Content Stub */}
+          {/* Preview Content */}
           <div className="max-w-xl mx-auto py-10">
             <div className="flex items-center gap-6 mb-12">
               <div className="w-24 h-24 rounded-3xl bg-slate-100 flex items-center justify-center border-2 border-slate-50">
@@ -257,27 +872,46 @@ const Editor = () => {
 
             <div className={`space-y-6 mb-10 transition-opacity ${portfolio.personalInfo.bio ? 'opacity-100' : 'opacity-20'}`}>
               <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">About Me</h2>
-              <p className="text-slate-600 leading-relaxed text-lg italic underline decoration-indigo-500/20 underline-offset-8">
+              <p className="text-slate-600 leading-relaxed text-lg italic">
                 {portfolio.personalInfo.bio || 'Your bio will appear here as you type in the editor on the left. Tell the world about your passion and skills.'}
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mb-10">
               <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100">
                 <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2 text-center">Projects</h3>
-                <div className="text-3xl font-black text-center">0</div>
+                <div className="text-3xl font-black text-center">{portfolio.projects?.length || 0}</div>
               </div>
               <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100">
-                <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2 text-center">Experience</h3>
-                <div className="text-3xl font-black text-center">0</div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2 text-center">Skills</h3>
+                <div className="text-3xl font-black text-center">{portfolio.skills?.length || 0}</div>
               </div>
             </div>
+
+            {/* Skills Preview */}
+            {portfolio.skills?.length > 0 && (
+              <div className="mb-10">
+                <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Skills</h2>
+                <div className="flex flex-wrap gap-2">
+                  {portfolio.skills.slice(0, 6).map((skill, i) => (
+                    <span key={i} className="px-3 py-1 bg-slate-100 rounded-full text-sm font-medium text-slate-700">
+                      {skill.name}
+                    </span>
+                  ))}
+                  {portfolio.skills.length > 6 && (
+                    <span className="px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium">
+                      +{portfolio.skills.length - 6} more
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
             
             <div className="mt-12 pt-12 border-t border-slate-100 flex justify-between items-center">
                <div className="flex gap-4">
-                 <div className="w-8 h-8 rounded-full bg-slate-100"></div>
-                 <div className="w-8 h-8 rounded-full bg-slate-100"></div>
-                 <div className="w-8 h-8 rounded-full bg-slate-100"></div>
+                 {portfolio.socialLinks?.github && <div className="w-8 h-8 rounded-full bg-slate-200"></div>}
+                 {portfolio.socialLinks?.linkedin && <div className="w-8 h-8 rounded-full bg-slate-200"></div>}
+                 {portfolio.socialLinks?.twitter && <div className="w-8 h-8 rounded-full bg-slate-200"></div>}
                </div>
                <p className="text-xs font-bold text-slate-300">MADE WITH FIRSTPORTFOLIO</p>
             </div>
