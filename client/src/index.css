@@ -86,263 +86,36 @@ body {
   scrollbar-width: none;
 }
 
-/* ========================================
-   MODERN TEMPLATE - Bold & Professional
-   ======================================== */
-.template-modern {
-  /* Default styles - uses Tailwind classes */
+
+/* Custom Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-/* Modern template keeps rounded corners and bold typography */
-.template-modern h1 {
-  font-weight: 900;
-  letter-spacing: -0.03em;
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 
-/* ========================================
-   MINIMAL TEMPLATE - Clean & Bento-box Style
-   ======================================== */
-.template-minimal {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Square everything */
-.template-minimal [class*="rounded-[40px]"],
-.template-minimal [class*="rounded-3xl"],
-.template-minimal [class*="rounded-2xl"],
-.template-minimal [class*="rounded-xl"] {
-  border-radius: 12px !important;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.template-minimal [class*="rounded-full"] {
-  border-radius: 8px !important;
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 20px;
+  border: 3px solid transparent;
+  background-clip: content-box;
 }
 
-/* Lighter typography */
-.template-minimal h1 {
-  font-weight: 700 !important;
-  font-size: 3rem !important;
-  letter-spacing: -0.04em !important;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.4);
+  background-clip: content-box;
 }
 
-.template-minimal h2 {
-  font-weight: 600 !important;
-  font-size: 1.5rem !important;
-}
-
-.template-minimal h3 {
-  font-weight: 600 !important;
-}
-
-/* Add subtle borders instead of shadows */
-.template-minimal section {
-  border-left: 3px solid transparent !important;
-}
-
-.template-minimal section:hover {
-  border-left-color: rgb(99, 102, 241) !important;
-  transition: border-color 0.3s ease;
-}
-
-/* Minimal spacing adjustments */
-.template-minimal section {
-  padding-top: 3rem !important;
-  padding-bottom: 3rem !important;
-}
-
-/* Clean, flat buttons */
-.template-minimal a,
-.template-minimal button {
-  border-radius: 8px !important;
-  font-weight: 500 !important;
-}
-
-/* Remove decorative elements */
-.template-minimal section > div[class*="absolute"] {
-  display: none !important;
-}
-
-/* Grid-based layout for skills/projects */
-.template-minimal [class*="grid"] {
-  gap: 1rem !important;
-}
-
-/* ========================================
-   CREATIVE TEMPLATE - Bold & Artistic
-   ======================================== */
-.template-creative {
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Dramatic gradient background */
-.template-creative::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.template-creative > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Extra rounded corners */
-.template-creative [class*="rounded-[40px]"] {
-  border-radius: 3rem !important;
-}
-
-.template-creative [class*="rounded-3xl"] {
-  border-radius: 2.5rem !important;
-}
-
-.template-creative [class*="rounded-2xl"] {
-  border-radius: 2rem !important;
-}
-
-.template-creative [class*="rounded-xl"] {
-  border-radius: 1.5rem !important;
-}
-
-/* Gradient text for headings */
-.template-creative h1 {
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 900 !important;
-  font-size: 4.5rem !important;
-  line-height: 1.1 !important;
-  animation: gradient-shift 8s ease infinite;
-  background-size: 200% 200%;
-}
-
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.template-creative h2 {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 800 !important;
-}
-
-/* Artistic section dividers */
-.template-creative section {
-  position: relative;
-  padding-top: 5rem !important;
-  padding-bottom: 5rem !important;
-}
-
-.template-creative section::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
-}
-
-.template-creative section:last-child::after {
-  display: none;
-}
-
-/* Asymmetric profile image */
-.template-creative section:first-of-type [class*="w-32"] {
-  transform: rotate(-5deg);
-  transition: transform 0.3s ease;
-}
-
-.template-creative section:first-of-type [class*="w-32"]:hover {
-  transform: rotate(0deg) scale(1.05);
-}
-
-/* Glassmorphism effect on cards */
-.template-creative [class*="bg-white/5"],
-.template-creative [class*="bg-slate-50"] {
-  backdrop-filter: blur(10px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-/* Dark theme adjustments for creative */
-.template-creative[class*="bg-slate-950"] [class*="bg-white/5"],
-.template-creative[class*="bg-slate-950"] [class*="bg-slate-50"] {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05)) !important;
-  border: 1px solid rgba(99, 102, 241, 0.3) !important;
-}
-
-/* Animated hover effects for creative template */
-.template-creative [class*="group"]:hover {
-  transform: translateY(-4px);
-  transition: transform 0.3s ease;
-}
-
-/* Colorful skill badges */
-.template-creative [class*="grid"] > div {
-  position: relative;
-  overflow: hidden;
-}
-
-.template-creative [class*="grid"] > div::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.template-creative [class*="grid"] > div:hover::before {
-  left: 100%;
-}
-
-/* Unique button styles */
-.template-creative a[class*="bg-indigo"],
-.template-creative button[class*="bg-indigo"] {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
-  box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.5);
-  transition: all 0.3s ease;
-}
-
-.template-creative a[class*="bg-indigo"]:hover,
-.template-creative button[class*="bg-indigo"]:hover {
-  box-shadow: 0 15px 40px -10px rgba(99, 102, 241, 0.7);
-  transform: translateY(-2px);
-}
-
-/* ========================================
-   DARK THEME OPTIMIZATIONS
-   ======================================== */
-
-/* Minimal dark theme - higher contrast */
-.template-minimal[class*="bg-slate-950"] {
-  background-color: #0a0a0f !important;
-}
-
-.template-minimal[class*="bg-slate-950"] section {
-  border-left-color: rgba(99, 102, 241, 0.2) !important;
-}
-
-/* Creative dark theme - enhanced glow */
-.template-creative[class*="bg-slate-950"]::before {
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
-}
