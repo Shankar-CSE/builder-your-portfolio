@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { 
   Github, Linkedin, Twitter, Mail, MapPin, ExternalLink,
   Calendar, BookOpen, Briefcase, Code, Layers, Award,
-  ChevronRight, ArrowUpRight, Zap, Target
+  ArrowUpRight, Zap, Target
 } from 'lucide-react';
 
-const MinimalTemplate = ({ portfolio, user, isDark }) => {
+const MinimalTemplate = ({ portfolio, isDark }) => {
   const { personalInfo, education, experience, projects, skills, socialLinks } = portfolio;
 
   const fadeIn = {

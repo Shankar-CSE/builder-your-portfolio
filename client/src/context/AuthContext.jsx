@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 import axios from '../api/axiosConfig';
 
 const AuthContext = createContext();
@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const login = async (email, password) => {
+    setLoading(true);
     try {
       const { data } = await axios.post('/api/auth/login', { email, password });
       setUser(data);
@@ -21,10 +22,13 @@ export const AuthProvider = ({ children }) => {
         success: false,
         message: error.response?.data?.message || 'Login failed',
       };
+    } finally {
+      setLoading(false);
     }
   };
 
   const register = async (name, email, password, username) => {
+    setLoading(true);
     try {
       const { data } = await axios.post('/api/auth/register', {
         name,
@@ -40,6 +44,8 @@ export const AuthProvider = ({ children }) => {
         success: false,
         message: error.response?.data?.message || 'Registration failed',
       };
+    } finally {
+      setLoading(false);
     }
   };
 
