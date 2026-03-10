@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
-import { User, Mail, Lock, Loader2, AlertCircle, AtSign } from 'lucide-react';
+import { User, Mail, Lock, Loader2, AlertCircle, AtSign, X } from 'lucide-react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +14,31 @@ const Register = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { register } = useAuth();
+  const { register, showRegisterModal, setShowRegisterModal, setShowLoginModal } = useAuth();
   const navigate = useNavigate();
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setShowRegisterModal(false);
+    };
+    if (showRegisterModal) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [showRegisterModal, setShowRegisterModal]);
+
+  // Reset form when modal opens
+  useEffect(() => {
+    if (showRegisterModal) {
+      setFormData({ name: '', email: '', password: '', username: '' });
+      setError('');
+    }
+  }, [showRegisterModal]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,6 +57,7 @@ const Register = () => {
     );
     
     if (result.success) {
+      setShowRegisterModal(false);
       navigate('/dashboard');
     } else {
       setError(result.message);
@@ -41,26 +65,39 @@ const Register = () => {
     setLoading(false);
   };
 
-  return (
-    <div className="min-h-screen mesh-gradient-dark font-sans flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      
-      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <Link to="/" className="flex justify-center items-center gap-2 mb-8">
-          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
-          <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
-        </Link>
-        <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Create your account</h2>
-        <p className="mt-2 text-center text-sm text-slate-400">
-          Already have an account?{' '}
-          <Link to="/login" className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-            Sign in
-          </Link>
-        </p>
-      </div>
+  const switchToLogin = () => {
+    setShowRegisterModal(false);
+    setShowLoginModal(true);
+  };
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="glass-card-dark py-8 px-4 shadow-2xl sm:rounded-[2rem] sm:px-10">
+  if (!showRegisterModal) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={() => setShowRegisterModal(false)}
+      />
+
+      {/* Modal */}
+      <div className="relative z-10 w-full max-w-md mx-4 animate-[modalIn_0.25s_ease-out]">
+        <div className="glass-card-dark py-8 px-4 shadow-2xl rounded-[2rem] sm:px-10 relative">
+          {/* Close button */}
+          <button
+            onClick={() => setShowRegisterModal(false)}
+            className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
           <form className="space-y-5" onSubmit={handleSubmit}>
+            <div className="flex justify-center items-center gap-2">
+              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
+              <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
+            </div>
+            <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Create your account</h2>
+
             {error && (
               <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
@@ -69,7 +106,7 @@ const Register = () => {
             )}
 
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-300 pl-1">
+              <label htmlFor="reg-name" className="block text-sm font-medium text-slate-300 pl-1">
                 Full Name
               </label>
               <div className="mt-1 relative">
@@ -77,7 +114,7 @@ const Register = () => {
                   <User className="h-5 h-5 text-slate-500" />
                 </div>
                 <input
-                  id="name"
+                  id="reg-name"
                   name="name"
                   type="text"
                   required
@@ -90,7 +127,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-300 pl-1">
+              <label htmlFor="reg-username" className="block text-sm font-medium text-slate-300 pl-1">
                 Username
               </label>
               <div className="mt-1 relative">
@@ -98,7 +135,7 @@ const Register = () => {
                   <AtSign className="h-5 h-5 text-slate-500" />
                 </div>
                 <input
-                  id="username"
+                  id="reg-username"
                   name="username"
                   type="text"
                   required
@@ -111,7 +148,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-300 pl-1">
+              <label htmlFor="reg-email" className="block text-sm font-medium text-slate-300 pl-1">
                 Email address
               </label>
               <div className="mt-1 relative">
@@ -119,7 +156,7 @@ const Register = () => {
                   <Mail className="h-5 h-5 text-slate-500" />
                 </div>
                 <input
-                  id="email"
+                  id="reg-email"
                   name="email"
                   type="email"
                   required
@@ -132,7 +169,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-300 pl-1">
+              <label htmlFor="reg-password" className="block text-sm font-medium text-slate-300 pl-1">
                 Password
               </label>
               <div className="mt-1 relative">
@@ -140,7 +177,7 @@ const Register = () => {
                   <Lock className="h-5 h-5 text-slate-500" />
                 </div>
                 <input
-                  id="password"
+                  id="reg-password"
                   name="password"
                   type="password"
                   required
@@ -164,6 +201,12 @@ const Register = () => {
                   'Create Account'
                 )}
               </button>
+              <p className="mt-2 text-center text-sm text-slate-400">
+                Already have an account?{' '}
+                <button type="button" onClick={switchToLogin} className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
+                  Sign in
+                </button>
+              </p>
             </div>
           </form>
         </div>

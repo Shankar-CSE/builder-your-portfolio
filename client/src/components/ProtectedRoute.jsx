@@ -1,17 +1,18 @@
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, setShowLoginModal, setShowRegisterModal } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!loading && !user) {
-      navigate('/login');
+      setShowRegisterModal(false);
+      setShowLoginModal(true);
+      navigate('/');
     }
-  }, [user, loading, navigate]);
-
+  }, [user, loading, setShowLoginModal, setShowRegisterModal, navigate]);
   if (loading) {
     return (
       <div className="min-h-screen mesh-gradient-dark flex items-center justify-center">

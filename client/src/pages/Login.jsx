@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, Loader2, AlertCircle } from 'lucide-react';
+import { Mail, Lock, Loader2, AlertCircle, X } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,8 +10,32 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { login } = useAuth();
+  const { login, showLoginModal, setShowLoginModal, showRegisterModal, setShowRegisterModal } = useAuth();
   const navigate = useNavigate();
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setShowLoginModal(false);
+    };
+    if (showLoginModal) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [showLoginModal, setShowLoginModal]);
+
+  // Reset form when modal opens
+  useEffect(() => {
+    if (showLoginModal) {
+      setEmail('');
+      setPassword('');
+      setError('');
+    }
+  }, [showLoginModal]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +45,7 @@ const Login = () => {
     const result = await login(email, password);
     
     if (result.success) {
+      setShowLoginModal(false);
       navigate('/dashboard');
     } else {
       setError(result.message);
@@ -28,19 +53,34 @@ const Login = () => {
     setLoading(false);
   };
 
-  return (
-    <div className="min-h-screen mesh-gradient-dark font-sans flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      
+  if (!showLoginModal) return null;
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="glass-card-dark py-8 px-4 shadow-2xl sm:rounded-[2rem] sm:px-10">
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={() => setShowLoginModal(false)}
+      />
+
+      {/* Modal */}
+      <div className="relative z-10 w-full max-w-md mx-4 animate-[modalIn_0.25s_ease-out]">
+        <div className="glass-card-dark py-8 px-4 shadow-2xl rounded-[2rem] sm:px-10 relative">
+          {/* Close button */}
+          <button
+            onClick={() => setShowLoginModal(false)}
+            className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
           <form className="space-y-6" onSubmit={handleSubmit}>
-        <Link to="/" className="flex justify-center items-center gap-2">
-          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
-          <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
-        </Link>
+            <div className="flex justify-center items-center gap-2">
+              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
+              <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
+            </div>
  
-             <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Welcome back</h2>
+            <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Welcome back</h2>
             {error && (
               <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
@@ -49,7 +89,7 @@ const Login = () => {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-300 pl-1">
+              <label htmlFor="login-email" className="block text-sm font-medium text-slate-300 pl-1">
                 Email address
               </label>
               <div className="mt-1 relative">
@@ -57,7 +97,7 @@ const Login = () => {
                   <Mail className="h-5 h-5 text-slate-500" />
                 </div>
                 <input
-                  id="email"
+                  id="login-email"
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -71,7 +111,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-300 pl-1">
+              <label htmlFor="login-password" className="block text-sm font-medium text-slate-300 pl-1">
                 Password
               </label>
               <div className="mt-1 relative">
@@ -79,7 +119,7 @@ const Login = () => {
                   <Lock className="h-5 h-5 text-slate-500" />
                 </div>
                 <input
-                  id="password"
+                  id="login-password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
@@ -91,8 +131,6 @@ const Login = () => {
                 />
               </div>
             </div>
-
-           
 
             <div>
               <button
@@ -106,12 +144,16 @@ const Login = () => {
                   'Sign in'
                 )}
               </button>
-               <p className="mt-2 text-center text-sm text-slate-400">
-          Or{' '}
-          <Link to="/register" className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-            create a new account
-          </Link>
-        </p>
+              <p className="mt-2 text-center text-sm text-slate-400">
+                Or{' '}
+                <button
+                  type="button"
+                  onClick={() => { setShowLoginModal(false); setShowRegisterModal(true); }}
+                  className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
+                >
+                  create a new account
+                </button>
+              </p>
             </div>
           </form>
         </div>
