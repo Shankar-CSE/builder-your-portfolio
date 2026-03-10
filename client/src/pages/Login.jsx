@@ -31,23 +31,16 @@ const Login = () => {
   return (
     <div className="min-h-screen mesh-gradient-dark font-sans flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
       
-      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <Link to="/" className="flex justify-center items-center gap-2 mb-8">
-          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
-          <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
-        </Link>
-        <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Welcome back</h2>
-        <p className="mt-2 text-center text-sm text-slate-400">
-          Or{' '}
-          <Link to="/register" className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-            create a new account
-          </Link>
-        </p>
-      </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="glass-card-dark py-8 px-4 shadow-2xl sm:rounded-[2rem] sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
+        <Link to="/" className="flex justify-center items-center gap-2">
+          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
+          <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
+        </Link>
+ 
+             <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Welcome back</h2>
             {error && (
               <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
@@ -99,25 +92,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white/10 rounded bg-white/5"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-400">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
+           
 
             <div>
               <button
@@ -131,6 +106,12 @@ const Login = () => {
                   'Sign in'
                 )}
               </button>
+               <p className="mt-2 text-center text-sm text-slate-400">
+          Or{' '}
+          <Link to="/register" className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
+            create a new account
+          </Link>
+        </p>
             </div>
           </form>
         </div>
