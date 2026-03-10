@@ -33,8 +33,8 @@ const Login = () => {
       
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <Link to="/" className="flex justify-center items-center gap-2 mb-8">
-          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">F</div>
-          <span className="text-2xl font-bold text-white tracking-tight font-outfit">FirstPortfolio</span>
+          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
+          <span className="text-2xl font-bold text-white tracking-tight font-outfit">Build Your Portfolio</span>
         </Link>
         <h2 className="text-center text-3xl font-extrabold text-white font-outfit">Welcome back</h2>
         <p className="mt-2 text-center text-sm text-slate-400">

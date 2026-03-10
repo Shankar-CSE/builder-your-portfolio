@@ -1,4 +1,4 @@
-# 🎓 FirstPortfolio - No-Code Portfolio Builder for Students
+# 🎓 Build Your Portfolio - No-Code Portfolio Builder for Students
 
 A modern, full-stack MERN application that enables students to create professional portfolio websites without any coding knowledge. Simply fill in your details, choose a template, and get a shareable public portfolio URL.
 
@@ -215,4 +215,4 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-**Made with FirstPortfolio** ✨
+**Made with build your portfolio** ✨

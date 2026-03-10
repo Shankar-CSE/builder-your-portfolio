@@ -218,11 +218,11 @@ const MinimalTemplate = ({ portfolio, isDark }) => {
         {/* Footer */}
         <footer className="mt-24 pt-12 border-t border-current opacity-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-xs font-black uppercase tracking-[0.4em] opacity-40">
-            FIRSTPORTFOLIO ARCHIVE © 2026
+            BYP ARCHIVE © 2026
           </div>
           <div className="flex gap-4">
             <a href="/" className="text-xs font-black uppercase tracking-widest italic text-indigo-500 hover:text-indigo-600 transition-colors">
-              Built with FirstPortfolio. Create yours free.
+              Built with BYP. Create yours free.
             </a>
           </div>
         </footer>

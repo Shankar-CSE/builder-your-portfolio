@@ -11,8 +11,8 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">F</div>
-              <span className="text-xl font-bold tracking-tight font-outfit">FirstPortfolio</span>
+              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
+              <span className="text-xl font-bold tracking-tight font-outfit">Build Your Portfolio</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Features</a>
@@ -102,8 +102,8 @@ const LandingPage = () => {
       <footer className="border-t border-white/5 py-12 bg-black/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-slate-800 rounded-md flex items-center justify-center font-bold text-xs text-white">F</div>
-            <span className="text-sm font-semibold text-slate-400">© 2026 FirstPortfolio</span>
+            <div className="w-6 h-6 bg-slate-800 rounded-md flex items-center justify-center font-bold text-xs text-white">BYP</div>
+            <span className="text-sm font-semibold text-slate-400">© 2026 Build Your Portfolio</span>
           </div>
           <div className="flex gap-8 text-sm text-slate-500">
             <a href="#" className="hover:text-white transition-colors">Privacy</a>

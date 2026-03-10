@@ -180,7 +180,7 @@ const CreativeTemplate = ({ portfolio, isDark }) => {
 
         <footer className="py-20 text-center">
           <a href="/" className="group inline-flex flex-col items-center gap-2">
-            <p className="text-xs font-black uppercase tracking-[0.5em] opacity-30 group-hover:opacity-100 transition-opacity">Built with FirstPortfolio</p>
+            <p className="text-xs font-black uppercase tracking-[0.5em] opacity-30 group-hover:opacity-100 transition-opacity">Built with BYP</p>
             <span className="text-indigo-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">Create your own for free →</span>
           </a>
         </footer>

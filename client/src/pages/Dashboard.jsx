@@ -71,8 +71,8 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold shadow-lg shadow-indigo-500/20">F</div>
-              <span className="font-bold hidden sm:block font-outfit tracking-tight">FirstPortfolio</span>
+              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold shadow-lg shadow-indigo-500/20">BYP</div>
+              <span className="font-bold hidden sm:block font-outfit tracking-tight">Build Your Portfolio</span>
             </div>
             
             <div className="flex items-center gap-4">
@@ -129,7 +129,7 @@ const Dashboard = () => {
                     <h2 className="text-2xl font-bold mb-6 font-outfit">Your portfolio is live!</h2>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       <div className="px-4 py-3 bg-slate-950/50 border border-white/10 rounded-xl text-sm font-mono text-slate-300 w-full sm:w-auto overflow-hidden text-ellipsis italic backdrop-blur-md">
-                        myfirstportfolio-coral.vercel.app/u/{user?.username}
+                        ${window.location.origin}/u/{user?.username}
                       </div>
                       <div className="flex gap-2 w-full sm:w-auto">
                         <a 
