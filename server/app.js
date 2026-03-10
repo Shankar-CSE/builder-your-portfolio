@@ -1,9 +1,11 @@
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
-dotenv.config();
+// Always resolve .env relative to server/ directory
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 // Connect to database
 connectDB();
@@ -13,11 +15,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-	origin: [
-		'https://myfirstportfolio-coral.vercel.app',
-		'http://localhost:5173',
-		'http://localhost:5000',
-	],
+	origin: true,
 	credentials: true,
 	methods: ['GET', 'POST', 'PUT', 'DELETE'],
 	allowedHeaders: ['Content-Type', 'Authorization'],
@@ -26,10 +24,5 @@ app.use(cors({
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/portfolio', require('./routes/portfolio'));
-
-// Basic Route
-app.get('/', (req, res) => {
-	res.send('API is running...');
-});
 
 module.exports = app;
