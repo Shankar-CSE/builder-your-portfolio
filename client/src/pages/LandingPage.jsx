@@ -2,30 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, Smartphone, Zap, Palette } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen mesh-gradient-dark text-white selection:bg-indigo-500/30 font-sans">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-slate-950/20 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
-              <span className="text-xl font-bold tracking-tight font-outfit">Build Your Portfolio</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Features</a>
-              <a href="#templates" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Templates</a>
-              <Link to="/login" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Login</Link>
-              <Link to="/register" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/20">
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <Navbar />
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -49,9 +32,7 @@ const LandingPage = () => {
                   Start Building Now
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <a href="#templates" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full text-slate-300 bg-white/5 border border-white/10 hover:bg-white/10 transition-all backdrop-blur-sm">
-                  View Templates
-                </a>
+               
               </div>
             </motion.div>
           </div>
@@ -66,7 +47,7 @@ const LandingPage = () => {
               {
                 icon: <Zap className="w-6 h-6 text-indigo-400" />,
                 title: "Real-time Editor",
-                desc: "See your changes instantly as you type with our side-by-side live preview."
+                desc: "See your changes instantly with live preview."
               },
               {
                 icon: <Palette className="w-6 h-6 text-purple-400" />,
@@ -100,16 +81,10 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="border-t border-white/5 py-12 bg-black/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-center items-center gap-8">
+          <div className="flex items-center justify-center gap-2">
             <div className="w-6 h-6 bg-slate-800 rounded-md flex items-center justify-center font-bold text-xs text-white">BYP</div>
             <span className="text-sm font-semibold text-slate-400">© 2026 Build Your Portfolio</span>
-          </div>
-          <div className="flex gap-8 text-sm text-slate-500">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="hover:text-white transition-colors">GitHub</a>
           </div>
         </div>
       </footer>
