@@ -207,7 +207,7 @@ const Editor = () => {
       {/* Editor - Full Width */}
       <div className="w-full flex flex-col h-screen">
         {/* Header */}
-        <header className="h-16 flex items-center justify-between px-6 border-b border-white/5 bg-slate-950/20 backdrop-blur-xl shrink-0 z-50">
+        <header className="h-20 flex items-center justify-between px-6 border-b border-white/5 bg-slate-950/20 backdrop-blur-xl shrink-0 z-50">
           <div className="flex items-center gap-4">
             <button onClick={() => navigate('/dashboard')} className="p-2 hover:bg-white/5 rounded-xl transition-colors">
               <ChevronLeft className="w-5 h-5" />
@@ -217,14 +217,14 @@ const Editor = () => {
           
           <div className="flex items-center gap-3">
             {saveStatus === 'success' && (
-              <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="text-xs text-emerald-400 font-medium flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3" /> Saved
+              <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="text-s text-emerald-400 font-medium flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4" /> Saved
               </motion.div>
             )}
             <button 
               onClick={handleSave} 
               disabled={saving}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2 hover:shadow-indigo-500/40 transform active:scale-95"
+              className="px-7 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2 hover:shadow-indigo-500/40 transform active:scale-95"
             >
               {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
               Save
@@ -233,15 +233,15 @@ const Editor = () => {
         </header>
 
         {/* Tab Navigation */}
-        <div className="flex overflow-x-auto no-scrollbar border-b border-white/5 bg-slate-950/10 backdrop-blur-sm shrink-0">
+        <div className="flex justify-center h-20 overflow-x-auto no-scrollbar border-b border-white/5 bg-slate-950/10 backdrop-blur-sm shrink-0">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-all border-b-2 ${
+              className={`flex w-full items-center gap-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-all border-b-2 ${
                 activeTab === tab.id 
-                  ? 'border-indigo-500 text-indigo-400 bg-indigo-500/5' 
-                  : 'border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                  ? 'border-indigo-500 text-indigo-400 bg-indigo-500/5 justify-center' 
+                  : 'border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/5 justify-center hover:border-white/10'
               }`}
             >
               {tab.icon}

@@ -18,19 +18,19 @@ const handleLogout = () => {
      <nav className=" h-20 pt-2 item-center justify-center top-0 w-full z-50 border-b border-white/5 bg-slate-950/20 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">BYP</div>
               <span className="text-xl font-bold tracking-tight font-outfit">Build Your Portfolio</span>
             </div>
 
 
  {user ? (
                <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
+              <div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
                 <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-[10px] font-bold shadow-inner">
-                  {user?.name?.charAt(0)}
+                  {user?.name?.charAt(0)?.toUpperCase()}
                 </div>
-                <span className="text-sm font-medium">{user?.name}</span>
+                <span className="text-sm font-medium">{user?.name?.toUpperCase()}</span>
               </div>
               <button 
                 onClick={handleLogout}

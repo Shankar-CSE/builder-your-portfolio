@@ -93,7 +93,7 @@ const Dashboard = () => {
                     <h2 className="text-2xl font-bold mb-6 font-outfit">Your portfolio is live!</h2>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       <div className="px-4 py-3 bg-slate-950/50 border border-white/10 rounded-xl text-sm font-mono text-slate-300 w-full sm:w-auto overflow-hidden text-ellipsis italic backdrop-blur-md">
-                        ${window.location.origin}/u/{user?.username}
+                       {`${window.location.origin}/u/${user?.username}`}
                       </div>
                       <div className="flex gap-2 w-full sm:w-auto">
                         <a 
