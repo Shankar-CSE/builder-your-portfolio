@@ -9,6 +9,7 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
+    confirmpassword: '',
     username: ''
   });
   const [error, setError] = useState('');
@@ -48,6 +49,12 @@ const Register = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
+
+    if(formData.password !== formData.confirmpassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
 
     const result = await register(
       formData.name,
@@ -182,6 +189,27 @@ const Register = () => {
                   type="password"
                   required
                   value={formData.password}
+                  onChange={handleChange}
+                  className="appearance-none block w-full pl-11 pr-3 py-3 border border-white/10 rounded-2xl bg-white/5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all sm:text-sm hover:border-white/20"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="reg-password" className="block text-sm font-medium text-slate-300 pl-1">
+               Confirm Password
+              </label>
+              <div className="mt-1 relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock className="h-5 h-5 text-slate-500" />
+                </div>
+                <input
+                  id="reg-password"
+                  name="confirmpassword"
+                  type="password"
+                  required
+                  value={formData.confirmpassword}
                   onChange={handleChange}
                   className="appearance-none block w-full pl-11 pr-3 py-3 border border-white/10 rounded-2xl bg-white/5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all sm:text-sm hover:border-white/20"
                   placeholder="••••••••"
