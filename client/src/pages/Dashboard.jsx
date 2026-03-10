@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
 import portfolioService from '../api/portfolioService';
 import { 
   Plus, 
-  ExternalLink, 
   Edit3, 
-  Settings, 
-  LogOut, 
-  User, 
-  CheckCircle2, 
   Eye,
-  BarChart3,
   Layout,
   Copy,
   Check
 } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const Dashboard = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [portfolio, setPortfolio] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -40,10 +34,6 @@ const Dashboard = () => {
     fetchPortfolio();
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
 
   const handleCopyURL = async () => {
     const portfolioURL = `${window.location.origin}/u/${user?.username}`;
@@ -67,34 +57,8 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen mesh-gradient-dark text-white font-sans selection:bg-indigo-500/30">
       {/* Sidebar / Topbar */}
-      <nav className="border-b border-white/5 bg-slate-950/20 backdrop-blur-xl sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold shadow-lg shadow-indigo-500/20">BYP</div>
-              <span className="font-bold hidden sm:block font-outfit tracking-tight">Build Your Portfolio</span>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
-                <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-[10px] font-bold shadow-inner">
-                  {user?.name?.charAt(0)}
-                </div>
-                <span className="text-sm font-medium">{user?.name}</span>
-              </div>
-              <button 
-                onClick={handleLogout}
-                className="p-2 text-slate-400 hover:text-white transition-colors hover:bg-white/5 rounded-lg"
-                title="Logout"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+     <Navbar />
+      <main className="max-w-7xl my-auto mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
           <div>
             <h1 className="text-3xl font-bold mb-2 font-outfit">My Dashboard</h1>

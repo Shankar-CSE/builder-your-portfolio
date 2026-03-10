@@ -36,7 +36,6 @@ const Register = () => {
   // Reset form when modal opens
   useEffect(() => {
     if (showRegisterModal) {
-      setFormData({ name: '', email: '', password: '', username: '' });
       setError('');
     }
   }, [showRegisterModal]);

@@ -31,8 +31,6 @@ const Login = () => {
   // Reset form when modal opens
   useEffect(() => {
     if (showLoginModal) {
-      setEmail('');
-      setPassword('');
       setError('');
     }
   }, [showLoginModal]);
