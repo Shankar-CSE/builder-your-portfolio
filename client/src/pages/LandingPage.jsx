@@ -5,7 +5,10 @@ import Navbar from '../components/Navbar';
 import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
-  const { setShowRegisterModal } = useAuth();
+  const { setShowRegisterModal, user } = useAuth();
+  const handlemodel = () => {
+    (user) ? window.location.href = "/dashboard" : setShowRegisterModal(true);
+  }
 
   return (
     <div className="min-h-screen mesh-gradient-dark text-white selection:bg-indigo-500/30 font-sans">
@@ -30,7 +33,7 @@ const LandingPage = () => {
                 Zero coding required. Simply fill in your details, choose a template, and get a professional public URL to share with recruiters.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button onClick={() => setShowRegisterModal(true)} className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/25 group">
+                <button onClick={handlemodel} className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/25 group">
                   Start Building Now
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>

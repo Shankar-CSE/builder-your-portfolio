@@ -255,7 +255,7 @@ const Editor = () => {
         </div>
 
         {/* Form Content */}
-        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto w-full flex items-start justify-center p-8 custom-scrollbar">
           <AnimatePresence mode="wait">
             {activeTab === 'personal' && (
               <PersonalInfoForm

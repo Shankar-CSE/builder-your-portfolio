@@ -8,7 +8,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      className="space-y-6 max-w-2xl"
+      className="space-y-6 max-w-2xl items-center justify-center mx-auto"
     >
       <div>
         <h2 className="text-xl font-bold mb-1">Personal Information</h2>
