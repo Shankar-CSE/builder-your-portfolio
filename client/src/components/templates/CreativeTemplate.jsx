@@ -31,7 +31,7 @@ const CreativeTemplate = ({ portfolio, isDark }) => {
             animate={{ scale: 1 }}
             className={`text-2xl font-black italic tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}
           >
-            {personalInfo?.name?.split(' ')[0]}.
+            {personalInfo?.name?.split(' ')[0]?.toUpperCase()}.
           </motion.div>
           <div className="flex gap-4">
             {socialLinks?.github && <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" className={`p-3 backdrop-blur-md rounded-full border transition-all ${isDark ? 'bg-white/5 border-white/10 hover:bg-white/20' : 'bg-white/40 border-slate-200 hover:bg-white/60'}`}><Github className="w-5 h-5" /></a>}
@@ -118,7 +118,7 @@ const CreativeTemplate = ({ portfolio, isDark }) => {
 
             {/* Projects Column - Floating Cards */}
             <div className="space-y-32 pt-20 lg:pt-60">
-              <h2 className="text-5xl font-black italic mb-16 text-right underline decoration-indigo-500 decoration-8 underline-offset-[20px]">PORTFOLIO.</h2>
+              <h2 className="text-5xl font-black italic mb-16 text-right underline decoration-indigo-500 decoration-8 underline-offset-[20px]">PROJECTS.</h2>
               <div className="space-y-12">
                 {projects?.length > 0 && projects.map((project, i) => (
                   <motion.div 

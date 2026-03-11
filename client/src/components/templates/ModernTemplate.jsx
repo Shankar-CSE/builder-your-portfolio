@@ -55,7 +55,7 @@ const ModernTemplate = ({ portfolio, isDark }) => {
                 transition={{ delay: 0.2 }}
               >
                 <h1 className={`text-4xl lg:text-5xl font-black mb-3 font-outfit tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  {personalInfo?.name}
+                  {personalInfo?.name?.toUpperCase()}
                 </h1>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-500 text-sm font-bold mb-6">
                   <Sparkles className="w-4 h-4" />
@@ -124,7 +124,7 @@ const ModernTemplate = ({ portfolio, isDark }) => {
         </motion.aside>
 
         {/* Right Content - Scrollable */}
-        <main className="flex-1 p-8 lg:p-12 lg:pt-24 z-10">
+        <main className="flex-1 p-8 lg:p-5 lg:pt-10 z-10">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -153,7 +153,7 @@ const ModernTemplate = ({ portfolio, isDark }) => {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                       <div className="flex items-center gap-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isDark ? 'bg-slate-800' : 'bg-indigo-50'} text-indigo-500 group-hover:scale-110 transition-transform`}>
-                          <Cpu className="w-6 h-6" />
+                          <Briefcase className="w-6 h-6 text-green-500" />
                         </div>
                         <div>
                           <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{exp.position}</h3>
