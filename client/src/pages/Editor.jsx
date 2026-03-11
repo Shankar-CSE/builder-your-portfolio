@@ -10,7 +10,6 @@ import {
   Briefcase, 
   GraduationCap, 
   Layers, 
-  Globe, 
   Settings as SettingsIcon,
   Loader2,
   CheckCircle2
@@ -19,7 +18,6 @@ import PersonalInfoForm from '../components/editor/PersonalInfoForm';
 import ExperienceForm from '../components/editor/ExperienceForm';
 import EducationForm from '../components/editor/EducationForm';
 import ProjectsForm from '../components/editor/ProjectsForm';
-import SocialLinksForm from '../components/editor/SocialLinksForm';
 import SettingsForm from '../components/editor/SettingsForm';
 
 const Editor = () => {
@@ -191,7 +189,6 @@ const Editor = () => {
     { id: 'experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
     { id: 'education', label: 'Education', icon: <GraduationCap className="w-4 h-4" /> },
     { id: 'projects', label: 'Projects', icon: <Layers className="w-4 h-4" /> },
-    { id: 'social', label: 'Social', icon: <Globe className="w-4 h-4" /> },
     { id: 'settings', label: 'Settings', icon: <SettingsIcon className="w-4 h-4" /> },
   ];
 
@@ -293,19 +290,14 @@ const Editor = () => {
               />
             )}
 
-            {activeTab === 'social' && (
-              <SocialLinksForm
-                socialLinks={portfolio.socialLinks}
-                updateSocialLinks={updateSocialLinks}
-              />
-            )}
-
             {activeTab === 'settings' && (
               <SettingsForm
                 settings={portfolio.settings}
                 templateId={portfolio.templateId}
                 updateSettings={updateSettings}
                 setTemplateId={(value) => setPortfolio({ ...portfolio, templateId: value })}
+                socialLinks={portfolio.socialLinks}
+                updateSocialLinks={updateSocialLinks}
               />
             )}
           </AnimatePresence>
