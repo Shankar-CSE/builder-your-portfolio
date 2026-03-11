@@ -1,205 +1,275 @@
-# 🎓 Build Your Portfolio - No-Code Portfolio Builder for Students
+# 🎓 Build Your Portfolio — No-Code Portfolio Builder for Students
 
-A modern, full-stack MERN application that enables students to create professional portfolio websites without any coding knowledge. Simply fill in your details, choose a template, and get a shareable public portfolio URL.
+A modern, full-stack **MERN** application that enables students to create professional portfolio websites without writing a single line of code. Fill in your details, pick a template, and instantly get a shareable public portfolio URL.
+
+> **Live Demo →** _`https://your-vercel-url.vercel.app`_ _(replace with your deployment URL)_
+
+---
+
+## 📸 Screenshots
+
+### Pages
+
+| Landing Page | Dashboard | Editor |
+|:---:|:---:|:---:|
+| ![Landing Page](./client/public/Landing.png) | ![Dashboard](./client/public/Dashboard.png) | ![Editor](./client/public/Editor.png) |
+
+### Templates
+
+| Modern | Minimal | Creative |
+|:---:|:---:|:---:|
+| ![Modern Template](./client/public/morden_template.png) | ![Minimal Template](./client/public/minimal_template.png) | ![Creative Template](./client/public/creative_template.png) |
+| Clean & Professional | Simple & Elegant | Bold & Expressive |
+
+---
 
 ## ✨ Features
 
 ### 🔐 Authentication
-- Email/Password registration and login
-- JWT-based authentication
-- Protected routes for dashboard and editor
-- Persistent authentication with localStorage
+- Email / Password registration and login
+- JWT-based authentication (30-day token expiry)
+- Modal-based auth UI with backdrop blur and keyboard shortcuts
+- Protected routes for Dashboard and Editor
+- Persistent sessions via localStorage
 
-### 📝 Portfolio Builder
-- **Personal Information**: Name, bio, role, email, location
-- **Experience**: Add work experience, internships, and jobs
-- **Education**: Showcase academic qualifications
-- **Skills**: List technical and soft skills with proficiency levels
-- **Projects**: Display your best work with tech stacks, GitHub, and live links
-- **Social Links**: Connect GitHub, LinkedIn, Twitter, and portfolio sites
-- **Settings**: Control theme (light/dark) and privacy (public/private)
+### 📝 Portfolio Builder (5-Tab Editor)
+| Tab | Contents |
+|---|---|
+| **Personal** | Name, role, bio, email, location + skills with proficiency levels |
+| **Experience** | Work history with company, position, dates, and description |
+| **Education** | Degrees, institutions, field of study, and year range |
+| **Projects** | Title, description, tech stack tags, GitHub & live links |
+| **Settings** | Template selector, theme toggle (light/dark), public/private switch, social links |
 
 ### 🎨 Live Editor
-- Real-time split-screen editor with live preview
-- Tab-based navigation for different sections
-- Add/Edit/Delete functionality for all sections
-- Auto-save capabilities
-- Smooth animations with Framer Motion
+- Real-time tabbed editing with Framer Motion transitions
+- Full CRUD for every section (add / edit / delete)
+- Save with loading state and success toast
+- Instant navigation back to Dashboard
 
 ### 🌐 Public Portfolio
-- Beautiful, responsive portfolio page
-- Accessible via `/u/username` URL
-- SEO-friendly design
-- Mobile-responsive layout
-- Professional templates
+- Shareable via `/u/username` URL
+- Dynamically renders the chosen template (Modern, Minimal, or Creative)
+- Responsive across all screen sizes
+- Custom 404 state with "Create Yours" CTA
 
 ### 📊 Dashboard
-- Portfolio overview and status
-- Copy shareable link functionality
-- Quick access to editor
-- Portfolio completion checklist
+- Portfolio status overview
+- One-click "Copy Link" with clipboard feedback
+- Quick access to Editor (create or edit)
+- Loading skeleton with spinner
+
+### 🌙 Theming
+- Global dark / light mode toggle (persisted in localStorage)
+- Tailwind CSS `dark:` class strategy
+- Dark mode by default
+- Per-portfolio theme setting (light or dark public page)
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **React** (v19) with Vite
-- **TailwindCSS** (v4) for styling  
-- **Framer Motion** for animations
-- **React Router** for navigation
-- **Axios** for API calls
-- **Lucide React** for icons
+| Technology | Version | Purpose |
+|---|---|---|
+| **React** | 19 | UI library |
+| **Vite** | 7 | Build tool & dev server |
+| **Tailwind CSS** | 4 | Utility-first styling |
+| **Framer Motion** | 12 | Animations & transitions |
+| **React Router** | 7 | Client-side routing (SPA) |
+| **React Hook Form** + **Zod** | 7 / 4 | Form handling & validation |
+| **Axios** | 1.13 | HTTP client with interceptors |
+| **Lucide React** | 0.562 | Icon library |
+| **clsx** + **tailwind-merge** | — | Conditional class utilities |
 
 ### Backend
-- **Node.js** & **Express.js**
-- **MongoDB** with Mongoose
-- **JWT** for authentication
-- **bcryptjs** for password hashing
-- **Cloudinary** for image uploads (ready)
+| Technology | Version | Purpose |
+|---|---|---|
+| **Node.js** + **Express** | — / 5 | REST API server |
+| **MongoDB** + **Mongoose** | — / 9 | Database & ODM |
+| **JWT** (jsonwebtoken) | 9 | Stateless authentication |
+| **bcryptjs** | 3 | Password hashing |
+| **Cloudinary** + **Multer** | 2 / 2 | Image upload (ready) |
+
+### DevOps & Deployment
+| Tool | Purpose |
+|---|---|
+| **Vercel** | Production hosting (serverless functions + static SPA) |
+| **Unified Dev Server** | Single `npm run dev` runs Express + Vite together on port 5173 |
+| **Nodemon** | Auto-restart during development |
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB (local or Atlas)
-- npm or yarn
+- **Node.js** v16+
+- **MongoDB** (local install or [MongoDB Atlas](https://www.mongodb.com/atlas))
+- **npm**
 
 ### Installation
 
 1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd First-Portfolio
-```
+   ```bash
+   git clone <repository-url>
+   cd builder-your-portfolio
+   ```
 
-2. **Install server dependencies**
-```bash
-cd server
-npm install
-```
+2. **Install all dependencies** (root `postinstall` auto-installs client deps too)
+   ```bash
+   npm install
+   ```
 
-3. **Install client dependencies**
-```bash
-cd ../client
-npm install
-```
+3. **Environment Setup**
 
-4. **Environment Setup**
+   Create a `.env` file inside the **`server/`** directory:
+   ```env
+   MONGO_URI=mongodb://localhost:27017/portfolio
+   JWT_SECRET=your_jwt_secret_key_here
+   ```
 
-Create `.env` file in the `server` directory:
-```env
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/portfolio
-JWT_SECRET=your_jwt_secret_key_here
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_cloudinary_key
-CLOUDINARY_API_SECRET=your_cloudinary_secret
-```
+   _(Optional)_ Create a `.env` file inside the **`client/`** directory for production API URL:
+   ```env
+   VITE_API_URL=https://your-production-api.com
+   ```
 
-Create `.env` file in the `client` directory:
-```env
-VITE_API_URL=http://localhost:5000
-```
+4. **Run the application** (single command — starts both API + frontend)
+   ```bash
+   npm run dev
+   ```
 
-5. **Run the application**
+   The app will be available at **http://localhost:5173**  
+   API routes are served from the same origin under `/api/*`.
 
-Terminal 1 - Start server:
-```bash
-cd server
-npm run dev
-```
-
-Terminal 2 - Start client:
-```bash
-cd client
-npm run dev
-```
-
-The application will be available at:
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:5000
+---
 
 ## 📁 Project Structure
 
 ```
-First-Portfolio/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── api/           # API service layer
-│   │   ├── components/    # Reusable components
-│   │   ├── context/       # React Context (Auth)
-│   │   ├── pages/         # Page components
-│   │   ├── App.jsx        # Main app component
-│   │   └── main.jsx       # Entry point
+builder-your-portfolio/
+├── api/
+│   └── [[...all]].js          # Vercel serverless adapter
+├── dev-server.js               # Unified Express + Vite dev server
+├── vercel.json                 # Vercel deployment config
+├── package.json                # Root scripts & server dependencies
+│
+├── client/                     # React frontend (Vite)
 │   ├── index.html
-│   └── package.json
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx             # Routes & layout
+│       ├── main.jsx            # Entry point
+│       ├── index.css           # Global styles & Tailwind
+│       ├── api/
+│       │   ├── axiosConfig.js  # Axios instance + auth interceptor
+│       │   └── portfolioService.js
+│       ├── components/
+│       │   ├── Navbar.jsx      # Shared navigation bar
+│       │   ├── ProtectedRoute.jsx
+│       │   ├── editor/         # Form components per tab
+│       │   │   ├── PersonalInfoForm.jsx
+│       │   │   ├── ExperienceForm.jsx
+│       │   │   ├── EducationForm.jsx
+│       │   │   ├── ProjectsForm.jsx
+│       │   │   ├── SkillsForm.jsx
+│       │   │   └── SettingsForm.jsx
+│       │   └── templates/      # Portfolio render templates
+│       │       ├── ModernTemplate.jsx
+│       │       ├── MinimalTemplate.jsx
+│       │       └── CreativeTemplate.jsx
+│       ├── context/
+│       │   ├── AuthContext.jsx  # Auth state, login, register, logout
+│       │   └── ThemeContext.jsx # Dark/light mode toggle
+│       └── pages/
+│           ├── LandingPage.jsx
+│           ├── Login.jsx       # Modal overlay
+│           ├── Register.jsx    # Modal overlay
+│           ├── Dashboard.jsx
+│           ├── Editor.jsx
+│           └── PublicPortfolio.jsx
 │
-├── server/                # Node.js backend
-│   ├── config/           # Database configuration
-│   ├── middleware/       # Auth middleware
-│   ├── models/           # Mongoose models
-│   ├── routes/           # API routes
-│   ├── index.js          # Server entry point
-│   └── package.json
-│
-└── README.md
+└── server/                     # Express API
+    ├── app.js                  # Express app setup & middleware
+    ├── index.js                # Standalone server entry
+    ├── config/
+    │   └── db.js               # MongoDB connection
+    ├── middleware/
+    │   └── authMiddleware.js   # JWT verification
+    ├── models/
+    │   ├── User.js             # User schema (bcrypt pre-save hook)
+    │   └── Portfolio.js        # Portfolio schema (all sections)
+    └── routes/
+        ├── auth.js             # POST /register, /login
+        └── portfolio.js        # GET /me, POST /, GET /public/:username
 ```
+
+---
 
 ## 🔑 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `POST` | `/api/auth/register` | Public | Create account (validates unique email & username) |
+| `POST` | `/api/auth/login` | Public | Login with email & password, returns JWT |
 
 ### Portfolio
-- `GET /api/portfolio/me` - Get current user's portfolio (protected)
-- `POST /api/portfolio` - Create/update portfolio (protected)
-- `GET /api/portfolio/public/:username` - Get public portfolio
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `GET` | `/api/portfolio/me` | Private | Get authenticated user's portfolio |
+| `POST` | `/api/portfolio` | Private | Create or update portfolio (upsert) |
+| `GET` | `/api/portfolio/public/:username` | Public | Get a user's public portfolio |
+
+---
 
 ## 🎯 Usage Guide
 
-1. **Register/Login**: Create an account or sign in
-2. **Dashboard**: View your portfolio status
-3. **Editor**: Click "Edit Portfolio" or "Create Portfolio"
-4. **Fill Details**: Navigate through tabs and fill your information:
-   - Personal: Name, role, bio
-   - Experience: Add work history
-   - Education: Add degrees/certifications
-   - Skills: List your skills
-   - Projects: Showcase your work
-   - Social: Add social links
-   - Settings: Configure theme & privacy
-5. **Save**: Click "Save" button to persist changes
-6. **Share**: Copy your portfolio URL from dashboard
-7. **View**: Visit `/u/yourusername` to see your live portfolio
+1. **Register** — Click "Get Started" on the landing page to create an account
+2. **Login** — Sign in with your email and password
+3. **Dashboard** — View your portfolio status and shareable link
+4. **Editor** — Click "Edit Portfolio" (or "Create Portfolio") and fill out:
+   - **Personal** — Name, role, bio, email, location, and skills
+   - **Experience** — Add your work history
+   - **Education** — Add degrees and certifications
+   - **Projects** — Showcase your work with tech stacks and links
+   - **Settings** — Choose a template, set theme, toggle privacy, add social links
+5. **Save** — Hit the Save button (top right) to persist all changes
+6. **Share** — Copy your public URL from the Dashboard
+7. **View** — Visit `/u/yourusername` to see your live portfolio
 
-## 🐛 Bug Fixes & Improvements
+---
 
-### Completed ✅
-- ✅ Implemented all editor tabs (Experience, Education, Skills, Projects, Social, Settings)
-- ✅ Added full CRUD operations for all sections
-- ✅ Fixed "Coming Soon" placeholders
-- ✅ Implemented copy to clipboard for sharing
-- ✅ Enhanced live preview with real-time updates
-- ✅ Added proper form validation and error handling
-- ✅ Improved UX with loading states and animations
-- ✅ Added custom scrollbar styling
-- ✅ Connected frontend to backend API
-- ✅ Setup Vite proxy for API calls
-
-## 🔮 Future Enhancements
+## 🔮 Roadmap
 
 - [ ] Image upload integration with Cloudinary
-- [ ] Multiple portfolio templates
-- [ ] QR code generation
+- [ ] QR code generation for portfolio URL
 - [ ] PDF resume export
-- [ ] Analytics tracking (views, clicks)
+- [ ] Analytics dashboard (views, clicks, visitors)
 - [ ] AI-powered content suggestions
 - [ ] Custom domain support
-- [ ] Dark/Light theme toggle
-- [ ] Certifications section
-- [ ] Achievements section
+- [ ] Certifications & achievements sections
+- [ ] More portfolio templates
 - [ ] Email verification
 - [ ] Password reset functionality
+
+## � Documentation
+
+See [DOCUMENTATION.md](DOCUMENTATION.md) for full technical documentation including:
+- Architecture overview & data flow diagrams
+- Frontend routing, context providers, and API layer
+- Backend models, routes, and authentication
+- Deployment configuration (Vercel)
+- Security considerations
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Development setup guide
+- Branching & commit conventions
+- Step-by-step guides for adding templates, editor tabs, and API endpoints
+- PR checklist and submission process
+- Good first issues and roadmap
 
 ## 📄 License
 
@@ -208,10 +278,6 @@ This project is open source and available for educational purposes.
 ## 👨‍💻 Author
 
 Built with ❤️ for students by students
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
 
 ---
 
