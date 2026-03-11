@@ -1,6 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Layers, Plus, Trash2 } from 'lucide-react';
+
+const TechStackInput = ({ value, onChange, onCommit }) => {
+  const [raw, setRaw] = useState(value?.join(', ') || '');
+  const [focused, setFocused] = useState(false);
+
+  // Sync from parent when not focused (e.g. initial load or external change)
+  useEffect(() => {
+    if (!focused) {
+      setRaw(value?.join(', ') || '');
+    }
+  }, [value, focused]);
+
+  return (
+    <input
+      type="text"
+      value={raw}
+      onChange={(e) => setRaw(e.target.value)}
+      onFocus={() => setFocused(true)}
+      onBlur={() => {
+        setFocused(false);
+        onCommit(raw);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          onCommit(raw);
+          e.target.blur();
+        }
+      }}
+      className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+      placeholder="React, Node.js, MongoDB"
+    />
+  );
+};
 
 const ProjectsForm = ({ projects, addProject, updateProject, updateProjectTechStack, removeProject }) => {
   return (
@@ -63,13 +97,10 @@ const ProjectsForm = ({ projects, addProject, updateProject, updateProjectTechSt
               ></textarea>
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Tech Stack (comma or space separated)</label>
-              <input
-                type="text"
-                value={project.techStack?.join(', ') || ''}
-                onChange={(e) => updateProjectTechStack(index, e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
-                placeholder="React Node.js MongoDB or React, Node.js, MongoDB"
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Tech Stack (comma separated)</label>
+              <TechStackInput
+                value={project.techStack}
+                onCommit={(raw) => updateProjectTechStack(index, raw)}
               />
             </div>
             <div className="grid grid-cols-2 gap-2">

@@ -1,5 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Check, Layout, Minus, Sparkles } from 'lucide-react';
+
+const templateOptions = [
+  { value: 'modern', label: 'Modern', description: 'Clean & professional', icon: Layout, gradient: 'from-indigo-500 to-blue-500' },
+  { value: 'minimal', label: 'Minimal', description: 'Simple & elegant', icon: Minus, gradient: 'from-slate-400 to-slate-600' },
+  { value: 'creative', label: 'Creative', description: 'Bold & expressive', icon: Sparkles, gradient: 'from-pink-500 to-purple-500' },
+];
 
 const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, socialLinks, updateSocialLinks }) => {
   return (
@@ -70,15 +77,36 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
 
             <div className="glass-card-dark p-6 rounded-[2rem]">
               <h3 className="font-bold mb-3">Template</h3>
-              <select
-                value={templateId}
-                onChange={(e) => setTemplateId(e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
-              >
-                <option value="modern">Modern</option>
-                <option value="minimal">Minimal</option>
-                <option value="creative">Creative</option>
-              </select>
+              <div className="grid grid-cols-3 gap-3">
+                {templateOptions.map((opt) => {
+                  const Icon = opt.icon;
+                  const isSelected = templateId === opt.value;
+                  return (
+                    <motion.button
+                      key={opt.value}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setTemplateId(opt.value)}
+                      className={`relative p-4 rounded-xl border-2 transition-all text-center ${
+                        isSelected
+                          ? 'border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/10'
+                          : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
+                      }`}
+                    >
+                      {isSelected && (
+                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                      )}
+                      <div className={`w-10 h-10 mx-auto mb-2 rounded-lg bg-gradient-to-br ${opt.gradient} flex items-center justify-center`}>
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="text-sm font-semibold">{opt.label}</p>
+                      <p className="text-[10px] text-slate-400 mt-0.5">{opt.description}</p>
+                    </motion.button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

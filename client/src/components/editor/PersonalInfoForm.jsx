@@ -2,6 +2,37 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Plus, X } from 'lucide-react';
 
+const levelOptions = [
+  { value: 'Beginner', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', activeColor: 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25' },
+  { value: 'Intermediate', color: 'bg-sky-500/20 text-sky-400 border-sky-500/30', activeColor: 'bg-sky-500 text-white shadow-lg shadow-sky-500/25' },
+  { value: 'Advanced', color: 'bg-amber-500/20 text-amber-400 border-amber-500/30', activeColor: 'bg-amber-500 text-white shadow-lg shadow-amber-500/25' },
+  { value: 'Expert', color: 'bg-rose-500/20 text-rose-400 border-rose-500/30', activeColor: 'bg-rose-500 text-white shadow-lg shadow-rose-500/25' },
+];
+
+const LevelPills = ({ value, onChange }) => (
+  <div className="flex flex-wrap gap-1.5">
+    {levelOptions.map((opt) => {
+      const isActive = value === opt.value;
+      return (
+        <motion.button
+          key={opt.value}
+          type="button"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => onChange(opt.value)}
+          className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all border ${
+            isActive
+              ? opt.activeColor
+              : `${opt.color} hover:opacity-80`
+          }`}
+        >
+          {opt.value}
+        </motion.button>
+      );
+    })}
+  </div>
+);
+
 const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, updateSkill, removeSkill }) => {
   return (
     <motion.div
@@ -114,16 +145,10 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
                   className="w-full bg-slate-950/30 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
                   placeholder="React.js"
                 />
-                <select
+                <LevelPills
                   value={skill.level}
-                  onChange={(e) => updateSkill(index, 'level', e.target.value)}
-                  className="w-full bg-slate-950/30 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
-                >
-                  <option value="Beginner">Beginner</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Advanced">Advanced</option>
-                  <option value="Expert">Expert</option>
-                </select>
+                  onChange={(val) => updateSkill(index, 'level', val)}
+                />
               </div>
               <button
                 onClick={() => removeSkill(index)}
