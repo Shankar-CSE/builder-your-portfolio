@@ -9,7 +9,6 @@ import {
   User, 
   Briefcase, 
   GraduationCap, 
-  Code, 
   Layers, 
   Globe, 
   Settings as SettingsIcon,
@@ -19,7 +18,6 @@ import {
 import PersonalInfoForm from '../components/editor/PersonalInfoForm';
 import ExperienceForm from '../components/editor/ExperienceForm';
 import EducationForm from '../components/editor/EducationForm';
-import SkillsForm from '../components/editor/SkillsForm';
 import ProjectsForm from '../components/editor/ProjectsForm';
 import SocialLinksForm from '../components/editor/SocialLinksForm';
 import SettingsForm from '../components/editor/SettingsForm';
@@ -192,7 +190,6 @@ const Editor = () => {
     { id: 'personal', label: 'Personal', icon: <User className="w-4 h-4" /> },
     { id: 'experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
     { id: 'education', label: 'Education', icon: <GraduationCap className="w-4 h-4" /> },
-    { id: 'skills', label: 'Skills', icon: <Code className="w-4 h-4" /> },
     { id: 'projects', label: 'Projects', icon: <Layers className="w-4 h-4" /> },
     { id: 'social', label: 'Social', icon: <Globe className="w-4 h-4" /> },
     { id: 'settings', label: 'Settings', icon: <SettingsIcon className="w-4 h-4" /> },
@@ -255,12 +252,16 @@ const Editor = () => {
         </div>
 
         {/* Form Content */}
-        <div className="flex-1 overflow-y-auto w-full flex items-start justify-center p-8 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto w-full flex items-start justify-center px-4 sm:px-8 py-8 custom-scrollbar">
           <AnimatePresence mode="wait">
             {activeTab === 'personal' && (
               <PersonalInfoForm
                 personalInfo={portfolio.personalInfo}
                 updatePersonalInfo={updatePersonalInfo}
+                skills={portfolio.skills}
+                addSkill={addSkill}
+                updateSkill={updateSkill}
+                removeSkill={removeSkill}
               />
             )}
             
@@ -279,15 +280,6 @@ const Editor = () => {
                 addEducation={addEducation}
                 updateEducation={updateEducation}
                 removeEducation={removeEducation}
-              />
-            )}
-
-            {activeTab === 'skills' && (
-              <SkillsForm
-                skills={portfolio.skills}
-                addSkill={addSkill}
-                updateSkill={updateSkill}
-                removeSkill={removeSkill}
               />
             )}
 
