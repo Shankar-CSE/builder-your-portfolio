@@ -26,7 +26,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
           </div>
 
           <div className="space-y-6">
-            <div className="glass-card-dark p-6 rounded-[2rem]">
+            <div className="t-card p-6 rounded-[2rem]">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-bold mb-1">Public Portfolio</h3>
@@ -35,7 +35,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                 <button
                   onClick={() => updateSettings('isPublic', !settings.isPublic)}
                   className={`relative w-14 h-7 rounded-full transition-colors ${
-                    settings.isPublic ? 'bg-indigo-600' : 'bg-slate-700'
+                    settings.isPublic ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-700'
                   }`}
                 >
                   <div
@@ -47,7 +47,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
               </div>
             </div>
 
-            <div className="glass-card-dark p-6 rounded-[2rem]">
+            <div className="t-card p-6 rounded-[2rem]">
               <h3 className="font-bold mb-3">Theme</h3>
               <div className="grid grid-cols-2 gap-3">
                 <button
@@ -55,10 +55,10 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                   className={`p-4 rounded-xl border-2 transition-all ${
                     settings.theme === 'light'
                       ? 'border-indigo-500 bg-indigo-500/10'
-                      : 'border-white/10 bg-white/5'
+                      : 'border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5'
                   }`}
                 >
-                  <div className="w-full h-16 bg-white rounded-lg mb-2"></div>
+                  <div className="w-full h-16 bg-white border border-black/10 rounded-lg mb-2"></div>
                   <p className="text-sm font-medium">Light</p>
                 </button>
                 <button
@@ -66,7 +66,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                   className={`p-4 rounded-xl border-2 transition-all ${
                     settings.theme === 'dark'
                       ? 'border-indigo-500 bg-indigo-500/10'
-                      : 'border-white/10 bg-white/5'
+                      : 'border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5'
                   }`}
                 >
                   <div className="w-full h-16 bg-slate-900 rounded-lg mb-2"></div>
@@ -75,7 +75,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
               </div>
             </div>
 
-            <div className="glass-card-dark p-6 rounded-[2rem]">
+            <div className="t-card p-6 rounded-[2rem]">
               <h3 className="font-bold mb-3">Template</h3>
               <div className="grid grid-cols-3 gap-3">
                 {templateOptions.map((opt) => {
@@ -90,7 +90,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                       className={`relative p-4 rounded-xl border-2 transition-all text-center ${
                         isSelected
                           ? 'border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/10'
-                          : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
+                          : 'border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 hover:border-black/20 dark:hover:border-white/20 hover:bg-black/10 dark:hover:bg-white/10'
                       }`}
                     >
                       {isSelected && (
@@ -102,7 +102,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                         <Icon className="w-5 h-5 text-white" />
                       </div>
                       <p className="text-sm font-semibold">{opt.label}</p>
-                      <p className="text-[10px] text-slate-400 mt-0.5">{opt.description}</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">{opt.description}</p>
                     </motion.button>
                   );
                 })}
@@ -126,7 +126,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                 name="github"
                 value={socialLinks.github}
                 onChange={updateSocialLinks}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
                 placeholder="https://github.com/yourusername"
               />
             </div>
@@ -137,18 +137,18 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                 name="linkedin"
                 value={socialLinks.linkedin}
                 onChange={updateSocialLinks}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
                 placeholder="https://linkedin.com/in/yourusername"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 ml-2 ">Twitter</label>
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 ml-2">Twitter</label>
               <input
                 type="url"
                 name="twitter"
                 value={socialLinks.twitter}
                 onChange={updateSocialLinks}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
                 placeholder="https://twitter.com/yourusername"
               />
             </div>
@@ -159,7 +159,7 @@ const SettingsForm = ({ settings, templateId, updateSettings, setTemplateId, soc
                 name="portfolio"
                 value={socialLinks.portfolio}
                 onChange={updateSocialLinks}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
                 placeholder="https://yourwebsite.com"
               />
             </div>

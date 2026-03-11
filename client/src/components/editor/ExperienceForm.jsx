@@ -17,7 +17,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
         </div>
         <button
           onClick={addExperience}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
+          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold text-white flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
         >
           <Plus className="w-4 h-4" /> Add
         </button>
@@ -32,7 +32,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {experience.map((exp, index) => (
-        <div key={index} className="glass-card-dark p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] space-y-4 relative">
+        <div key={index} className="t-card p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] space-y-4 relative">
           <button
             onClick={() => removeExperience(index)}
             className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
@@ -47,7 +47,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
                 type="text"
                 value={exp.position}
                 onChange={(e) => updateExperience(index, 'position', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                 placeholder="Software Engineer"
               />
             </div>
@@ -57,7 +57,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
                 type="text"
                 value={exp.company}
                 onChange={(e) => updateExperience(index, 'company', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                 placeholder="Tech Corp"
               />
             </div>
@@ -67,7 +67,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
                 type="text"
                 value={exp.location}
                 onChange={(e) => updateExperience(index, 'location', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                 placeholder="Remote"
               />
             </div>
@@ -78,7 +78,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
                   type="text"
                   value={exp.startDate}
                   onChange={(e) => updateExperience(index, 'startDate', e.target.value)}
-                  className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                  className="w-full t-input rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                   placeholder="Jan 2024"
                 />
               </div>
@@ -88,7 +88,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
                   type="text"
                   value={exp.endDate}
                   onChange={(e) => updateExperience(index, 'endDate', e.target.value)}
-                  className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                  className="w-full t-input rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                   placeholder="Present"
                 />
               </div>
@@ -99,7 +99,7 @@ const ExperienceForm = ({ experience, addExperience, updateExperience, removeExp
                 rows="3"
                 value={exp.description}
                 onChange={(e) => updateExperience(index, 'description', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm resize-none"
                 placeholder="Describe your responsibilities and achievements..."
               ></textarea>
             </div>

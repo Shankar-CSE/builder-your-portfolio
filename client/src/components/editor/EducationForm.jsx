@@ -18,7 +18,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
         </div>
         <button
           onClick={addEducation}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
+          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold text-white flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
         >
           <Plus className="w-4 h-4" /> Add
         </button>
@@ -33,7 +33,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {education.map((edu, index) => (
-        <div key={index} className="glass-card-dark p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] space-y-4 relative">
+        <div key={index} className="t-card p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] space-y-4 relative">
           <button
             onClick={() => removeEducation(index)}
             className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors"
@@ -48,7 +48,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
                 type="text"
                 value={edu.institution}
                 onChange={(e) => updateEducation(index, 'institution', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                 placeholder="University Name"
               />
             </div>
@@ -58,7 +58,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
                 type="text"
                 value={edu.degree}
                 onChange={(e) => updateEducation(index, 'degree', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                 placeholder="Bachelor's"
               />
             </div>
@@ -68,7 +68,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
                 type="text"
                 value={edu.fieldOfStudy}
                 onChange={(e) => updateEducation(index, 'fieldOfStudy', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                 placeholder="Computer Science"
               />
             </div>
@@ -79,7 +79,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
                   type="text"
                   value={edu.startYear}
                   onChange={(e) => updateEducation(index, 'startYear', e.target.value)}
-                  className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                  className="w-full t-input rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                   placeholder="2020"
                 />
               </div>
@@ -89,7 +89,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
                   type="text"
                   value={edu.endYear}
                   onChange={(e) => updateEducation(index, 'endYear', e.target.value)}
-                  className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+                  className="w-full t-input rounded-xl px-3 sm:px-4 py-2 text-sm sm:text-base backdrop-blur-sm"
                   placeholder="2024"
                 />
               </div>
@@ -100,7 +100,7 @@ const EducationForm = ({ education, addEducation, updateEducation, removeEducati
                 rows="2"
                 value={edu.description}
                 onChange={(e) => updateEducation(index, 'description', e.target.value)}
-                className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
+                className="w-full t-input rounded-xl px-4 py-2 text-sm sm:text-base backdrop-blur-sm resize-none"
                 placeholder="Optional: achievements, GPA, honors..."
               ></textarea>
             </div>

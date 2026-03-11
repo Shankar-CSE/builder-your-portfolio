@@ -48,21 +48,21 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen mesh-gradient-dark flex items-center justify-center">
+      <div className="min-h-screen mesh-bg flex items-center justify-center">
         <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen mesh-gradient-dark text-white font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen mesh-bg text-slate-900 dark:text-white font-sans selection:bg-indigo-500/30">
       {/* Sidebar / Topbar */}
      <Navbar />
       <main className="max-w-7xl my-auto mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
           <div>
             <h1 className="text-3xl font-bold mb-2 font-outfit">My Dashboard</h1>
-            <p className="text-slate-400">Welcome back! Manage your portfolio and track its performance.</p>
+            <p className="text-slate-500 dark:text-slate-400">Welcome back! Manage your portfolio and track its performance.</p>
           </div>
           
           <Link 
@@ -77,13 +77,13 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Main Status Card */}
           <div className="md:col-span-2 space-y-6">
-            <div className="glass-card-dark rounded-[2rem] p-8 overflow-hidden relative group">
+            <div className="t-card rounded-[2rem] p-8 overflow-hidden relative group">
               <div className="absolute top-0 right-0 p-6 opacity-50 group-hover:opacity-100 transition-opacity">
-                <Layout className="w-24 h-24 text-white/5 -rotate-12 transform group-hover:scale-110 transition-transform duration-700" />
+                <Layout className="w-24 h-24 text-black/5 dark:text-white/5 -rotate-12 transform group-hover:scale-110 transition-transform duration-700" />
               </div>
               
               <div className="relative z-10">
-                <div className="flex items-center gap-2 text-indigo-400 mb-4">
+                <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 mb-4">
                   <span className="text-xs font-bold uppercase tracking-widest">Live Portfolio</span>
                   <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse box-shadow-glow"></div>
                 </div>
@@ -92,7 +92,7 @@ const Dashboard = () => {
                   <>
                     <h2 className="text-2xl font-bold mb-6 font-outfit">Your portfolio is live!</h2>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                      <div className="px-4 py-3 bg-slate-950/50 border border-white/10 rounded-xl text-sm font-mono text-slate-300 w-full sm:w-auto overflow-hidden text-ellipsis italic backdrop-blur-md">
+                      <div className="px-4 py-3 bg-black/5 dark:bg-slate-950/50 border border-black/5 dark:border-white/10 rounded-xl text-sm font-mono text-slate-600 dark:text-slate-300 w-full sm:w-auto overflow-hidden text-ellipsis italic backdrop-blur-md">
                        {`${window.location.origin}/u/${user?.username}`}
                       </div>
                       <div className="flex gap-2 w-full sm:w-auto">
@@ -100,17 +100,17 @@ const Dashboard = () => {
                           href={`/u/${user?.username}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-sm font-semibold border border-white/5 hover:border-white/20"
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 rounded-xl transition-all text-sm font-semibold border border-black/5 dark:border-white/5 hover:border-black/15 dark:hover:border-white/20"
                         >
                           <Eye className="w-4 h-4" /> View
                         </a>
                         <button 
                           onClick={handleCopyURL}
-                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-sm font-semibold border border-white/5 hover:border-white/20"
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 rounded-xl transition-all text-sm font-semibold border border-black/5 dark:border-white/5 hover:border-black/15 dark:hover:border-white/20"
                         >
                           {copied ? (
                             <>
-                              <Check className="w-4 h-4 text-emerald-400" /> Copied!
+                              <Check className="w-4 h-4 text-emerald-500" /> Copied!
                             </>
                           ) : (
                             <>
@@ -124,7 +124,7 @@ const Dashboard = () => {
                 ) : (
                   <>
                     <h2 className="text-2xl font-bold mb-4 font-outfit">You haven't built your portfolio yet.</h2>
-                    <p className="text-slate-400 mb-6">Get started by choosing a template and adding your details. It only takes a few minutes.</p>
+                    <p className="text-slate-500 dark:text-slate-400 mb-6">Get started by choosing a template and adding your details. It only takes a few minutes.</p>
                   </>
                 )}
               </div>

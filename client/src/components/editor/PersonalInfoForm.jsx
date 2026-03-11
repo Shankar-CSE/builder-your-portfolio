@@ -58,7 +58,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
             name="name" 
             value={personalInfo.name} 
             onChange={updatePersonalInfo}
-            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+            className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
             placeholder="John Doe"
           />
         </div>
@@ -70,7 +70,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
             name="role" 
             value={personalInfo.role} 
             onChange={updatePersonalInfo}
-            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+            className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
             placeholder="Full Stack Developer & Student"
           />
         </div>
@@ -82,7 +82,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
             rows="4"
             value={personalInfo.bio} 
             onChange={updatePersonalInfo}
-            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm resize-none"
+            className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm resize-none"
             placeholder="Tell recruiters about yourself..."
           ></textarea>
         </div>
@@ -94,7 +94,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
             name="email" 
             value={personalInfo.email} 
             onChange={updatePersonalInfo}
-            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+            className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
           />
         </div>
 
@@ -105,7 +105,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
             name="location" 
             value={personalInfo.location} 
             onChange={updatePersonalInfo}
-            className="w-full bg-slate-950/30 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50 backdrop-blur-sm"
+            className="w-full t-input rounded-xl px-4 py-3 backdrop-blur-sm"
             placeholder="New York, NY"
           />
         </div>
@@ -121,7 +121,7 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
             </div>
             <button
               onClick={addSkill}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors"
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-sm font-bold text-white flex items-center gap-2 transition-colors"
             >
               <Plus className="w-4 h-4" /> Add
             </button>
@@ -136,13 +136,13 @@ const PersonalInfoForm = ({ personalInfo, updatePersonalInfo, skills, addSkill, 
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {skills.map((skill, index) => (
-            <div key={index} className="glass-card-dark p-4 rounded-[1.5rem] flex items-center gap-3 relative">
+            <div key={index} className="t-card p-4 rounded-[1.5rem] flex items-center gap-3 relative">
               <div className="flex-1 space-y-2">
                 <input
                   type="text"
                   value={skill.name}
                   onChange={(e) => updateSkill(index, 'name', e.target.value)}
-                  className="w-full bg-slate-950/30 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all hover:border-white/20 focus:bg-slate-950/50"
+                  className="w-full t-input rounded-lg px-3 py-2 text-sm"
                   placeholder="React.js"
                 />
                 <LevelPills

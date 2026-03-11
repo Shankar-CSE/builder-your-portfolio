@@ -194,20 +194,20 @@ const Editor = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen mesh-bg flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen mesh-gradient-dark text-white font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen mesh-bg text-slate-900 dark:text-white font-sans selection:bg-indigo-500/30">
       {/* Editor - Full Width */}
       <div className="w-full flex flex-col h-screen">
         {/* Header */}
-        <header className="h-20 flex items-center justify-between px-6 border-b border-white/5 bg-slate-950/20 backdrop-blur-xl shrink-0 z-50">
+        <header className="h-20 flex items-center justify-between px-6 t-nav shrink-0 z-50">
           <div className="flex items-center gap-4">
-            <button onClick={() => navigate('/dashboard')} className="p-2 hover:bg-white/5 rounded-xl transition-colors">
+            <button onClick={() => navigate('/dashboard')} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl transition-colors">
               <ChevronLeft className="w-5 h-5" />
             </button>
             <h1 className="font-bold text-lg hidden sm:block font-outfit tracking-tight">Editor</h1>
@@ -231,15 +231,15 @@ const Editor = () => {
         </header>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center h-20 overflow-x-auto no-scrollbar border-b border-white/5 bg-slate-950/10 backdrop-blur-sm shrink-0">
+        <div className="flex justify-center h-20 overflow-x-auto no-scrollbar border-b border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-slate-950/10 backdrop-blur-sm shrink-0">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`flex w-full items-center gap-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-all border-b-2 ${
                 activeTab === tab.id 
-                  ? 'border-indigo-500 text-indigo-400 bg-indigo-500/5 justify-center' 
-                  : 'border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/5 justify-center hover:border-white/10'
+                  ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-500/5 justify-center' 
+                  : 'border-transparent text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 justify-center hover:border-black/10 dark:hover:border-white/10'
               }`}
             >
               {tab.icon}

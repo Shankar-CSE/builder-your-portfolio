@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
 }
@@ -20,7 +22,25 @@ body {
   font-family: 'Outfit', sans-serif;
 }
 
-/* Premium Background Utils */
+/* ===== Theme-aware backgrounds ===== */
+.mesh-bg {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.08) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+}
+.dark .mesh-bg {
+  background-color: #020617;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+}
+
+/* Legacy - keep for backward compat */
 .mesh-gradient-light {
   background-color: #f8fafc;
   background-image: 
@@ -39,6 +59,7 @@ body {
     radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
 }
 
+/* ===== Theme-aware glass cards ===== */
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
@@ -51,6 +72,65 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Theme-aware card - auto switches */
+.t-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.dark .t-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+}
+
+/* Theme-aware input */
+.t-input {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+  transition: all 0.15s;
+}
+.t-input::placeholder {
+  color: #94a3b8;
+}
+.t-input:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+}
+.t-input:focus {
+  background: rgba(0, 0, 0, 0.02);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+}
+.dark .t-input {
+  background: rgba(2, 6, 23, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+.dark .t-input::placeholder {
+  color: #475569;
+}
+.dark .t-input:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.dark .t-input:focus {
+  background: rgba(2, 6, 23, 0.5);
+}
+
+/* Theme-aware navbar */
+.t-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.dark .t-nav {
+  background: rgba(2, 6, 23, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
 .text-gradient {
